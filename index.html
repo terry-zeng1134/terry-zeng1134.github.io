@@ -69,6 +69,15 @@ a:hover{text-decoration:underline;}
 /* ---------- work grid ---------- */
 .work-head{margin:0 0 6px; font-size:20px; font-weight:700; letter-spacing:-.015em;}
 .work-sub{margin:0 0 22px; font-size:14px; color:var(--muted);}
+.orgkey{
+  margin:0 0 22px; padding:14px 16px;
+  border:1px solid var(--line); border-radius:var(--radius); background:var(--surface);
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:9px 24px;
+}
+.orgkey dt{font-size:13px; font-weight:650; color:var(--ink);}
+.orgkey dd{margin:0; font-size:12.5px; color:var(--muted); line-height:1.4;}
+.orgkey dd span{opacity:.75; font-style:italic;}
+
 .grid{
   display:grid; gap:12px;
   grid-template-columns:repeat(auto-fill, minmax(228px, 1fr));
@@ -163,7 +172,10 @@ a:hover{text-decoration:underline;}
   </dl>
 
   <h2>Education</h2>
-  <dl><dd>McGill University</dd></dl>
+  <dl>
+    <dd><strong>McGill University</strong> — BA, Joint Honors Economics and Finance, Minor in Computer Science</dd>
+    <dd style="margin-top:4px;color:var(--muted);font-size:13px;">Applied Machine Learning · Honors Econometrics &amp; Statistics I–II · Software Systems</dd>
+  </dl>
 
   <h2>Elsewhere</h2>
   <ul class="links">
@@ -176,6 +188,13 @@ a:hover{text-decoration:underline;}
 <main>
   <h2 class="work-head">Selected work in experimentation, causal inference and marketplace ML</h2>
   <p class="work-sub">Thirteen pieces of shipped work across a three-sided ads marketplace, an e-commerce chat product, a consumer-brand fund, and heavy industry.</p>
+
+  <dl class="orgkey">
+    <div><dt>Rokt</dt><dd>Three-sided ads marketplace for e-commerce platforms</dd></div>
+    <div><dt>Humankind</dt><dd>Embedded chat connecting e-commerce shoppers with product experts <span>· acquired</span></dd></div>
+    <div><dt>CircleUp</dt><dd>Consumer-brand VC fund built on an in-house data platform <span>· acquired</span></dd></div>
+    <div><dt>Partners in Performance</dt><dd>Operational-improvement consultancy <span>· now part of Accenture</span></dd></div>
+  </dl>
 
   <div class="grid" id="grid">
 
