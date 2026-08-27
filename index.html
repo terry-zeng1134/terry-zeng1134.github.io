@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terry Zeng — Senior Data Scientist</title>
+<meta name="description" content="Terry Zeng — Senior Data Scientist. Experimentation, causal inference and marketplace ML. Selected work from Rokt, Humankind, CircleUp and Partners in Performance.">
+<meta property="og:title" content="Terry Zeng — Senior Data Scientist">
+<meta property="og:description" content="Experimentation, causal inference and marketplace ML. Selected work.">
+<meta property="og:type" content="profile">
+<style>
+:root{
+  --bg:#ffffff; --surface:#fbfbfc; --surface-hover:#f4f5f7;
+  --ink:#14161a; --ink-2:#464c54; --muted:#676d75;
+  --line:#e4e6ea; --line-strong:#cdd1d7;
+  --accent:#1f5fd6;
+  --radius:6px;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0f1113; --surface:#16191c; --surface-hover:#1d2125;
+    --ink:#eceef1; --ink-2:#b3bac1; --muted:#8b939b;
+    --line:#262b30; --line-strong:#394046;
+    --accent:#7aa7f5;
+  }
+}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent); text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+.wrap{
+  max-width:1180px; margin:0 auto; padding:56px 32px 96px;
+  display:grid; grid-template-columns:280px minmax(0,1fr); gap:64px; align-items:start;
+}
+
+/* ---------- left rail ---------- */
+.rail{
+  position:sticky; top:56px;
+  max-height:calc(100vh - 96px); overflow-y:auto;
+  scrollbar-width:thin; overscroll-behavior:contain;
+}
+.rail::-webkit-scrollbar{width:6px;}
+.rail::-webkit-scrollbar-thumb{background:var(--line-strong); border-radius:3px;}
+.name{
+  font-size:27px; font-weight:700; letter-spacing:-.02em; margin:0 0 4px;
+}
+.role{font-size:15px; font-weight:600; color:var(--ink); margin:0 0 2px;}
+.discipline{font-size:14px; color:var(--ink-2); margin:0 0 18px;}
+.bio{font-size:14px; color:var(--ink-2); margin:0 0 18px;}
+.rail h2{
+  font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--muted); margin:22px 0 8px;
+}
+.rail dl{margin:0; font-size:13.5px; color:var(--ink-2);}
+.rail dt{font-weight:600; color:var(--ink); margin-top:8px;}
+.rail dt:first-child{margin-top:0;}
+.rail dd{margin:0 0 2px;}
+.links{list-style:none; margin:0; padding:0; font-size:14px;}
+.links li{margin-bottom:5px;}
+.where{font-size:13.5px; color:var(--muted); margin:0 0 20px;}
+
+/* ---------- work grid ---------- */
+.work-head{margin:0 0 6px; font-size:20px; font-weight:700; letter-spacing:-.015em;}
+.work-sub{margin:0 0 22px; font-size:14px; color:var(--muted);}
+.grid{
+  display:grid; gap:12px;
+  grid-template-columns:repeat(auto-fill, minmax(228px, 1fr));
+}
+.tile{
+  border:1px solid var(--line); border-radius:var(--radius);
+  background:var(--surface); overflow:hidden;
+  transition:border-color .12s ease;
+  display:flex; flex-direction:column;
+}
+.tile:hover{border-color:var(--line-strong);}
+.tile.open{grid-column:1/-1; border-color:var(--line-strong); background:var(--bg);}
+
+.tile-head{
+  display:flex; flex-direction:column; flex:1 1 auto;
+  width:100%; text-align:left; cursor:pointer;
+  background:none; border:0; padding:14px 15px 15px; margin:0;
+  font:inherit; color:inherit;
+}
+.tile-head:hover{background:var(--surface-hover);}
+.tile.open .tile-head{background:none; padding-bottom:6px;}
+.tile-head:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
+
+.kicker{
+  display:block; font-size:11.5px; font-weight:600; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--muted); margin-bottom:6px;
+}
+.t-title{
+  display:block; font-size:15px; font-weight:650; line-height:1.3;
+  letter-spacing:-.01em; margin-bottom:12px; color:var(--ink);
+}
+.metric{display:block; margin-bottom:14px; flex:0 0 auto;}
+.metric b{
+  display:block; font-size:29px; font-weight:600; letter-spacing:-.025em;
+  line-height:1.05; color:var(--ink);
+}
+.metric span{display:block; font-size:12.5px; color:var(--muted); margin-top:2px;}
+.tags{list-style:none; margin-top:auto; display:flex; flex-wrap:wrap; gap:5px; margin:0; padding:0;}
+.tags li{
+  font-size:11.5px; color:var(--ink-2); border:1px solid var(--line);
+  border-radius:3px; padding:1px 6px; background:var(--bg);
+}
+.tile.open .tags li{background:var(--surface);}
+.tile.open .tags{margin-top:0;}
+
+.tile-body{padding:0 15px 16px;}
+.tile-body[hidden]{display:none;}
+.tile-body p{
+  margin:0 0 10px; font-size:14.5px; color:var(--ink-2); max-width:62ch;
+}
+.tile-body p:last-child{margin-bottom:0;}
+.tile-body .ctx{color:var(--muted);}
+.tile-body .knew{
+  margin-top:12px; padding-top:11px; border-top:1px solid var(--line);
+  font-size:14px; color:var(--ink-2);
+}
+.tile-body .knew strong{color:var(--ink); font-weight:650;}
+
+.hint{margin:18px 0 0; font-size:12.5px; color:var(--muted);}
+
+@media (max-width:860px){
+  .wrap{grid-template-columns:1fr; gap:40px; padding:36px 22px 72px;}
+  .rail{position:static; max-height:none; overflow:visible;}
+  .grid{grid-template-columns:repeat(auto-fill, minmax(190px,1fr));}
+}
+@media (max-width:520px){
+  .grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="rail">
+  <h1 class="name">Terry Zeng</h1>
+  <p class="role">Senior Data Scientist</p>
+  <p class="discipline">Experimentation, causal inference &amp; marketplace ML</p>
+  <p class="where">New York, NY</p>
+
+  <p class="bio">Six years turning experimentation and analysis into product decisions in advertising and commerce marketplaces. Built the models and the analytics function early; now own the measurement systems and the decisions they drive.</p>
+
+  <h2>Skills</h2>
+  <dl>
+    <dt>Experimentation</dt>
+    <dd>A/B test design and analysis, experiment tooling and instrumentation, north-star and leading-indicator metric design, funnel analysis</dd>
+    <dt>Analysis &amp; modeling</dt>
+    <dd>Regression modeling, NLP and sentiment analysis, LLM output grading and agent evals</dd>
+    <dt>Stack</dt>
+    <dd>Python, SQL, Jupyter, Rockset, dbt, Snowflake, Airflow, Tableau, Looker, Google Cloud, Claude Code, OpenAI API</dd>
+    <dt>Languages</dt>
+    <dd>English, French, Mandarin, Cantonese</dd>
+  </dl>
+
+  <h2>Education</h2>
+  <dl><dd>McGill University</dd></dl>
+
+  <h2>Elsewhere</h2>
+  <ul class="links">
+    <li><a href="mailto:terry.zeng17@gmail.com">terry.zeng17@gmail.com</a></li>
+    <li><a href="https://www.linkedin.com/in/terryzeng">LinkedIn</a></li>
+    <li><a href="https://github.com/terry-zeng1134">GitHub</a></li>
+  </ul>
+</header>
+
+<main>
+  <h2 class="work-head">Selected work in experimentation, causal inference and marketplace ML</h2>
+  <p class="work-sub">Thirteen pieces of shipped work across a three-sided ads marketplace, an e-commerce chat product, a consumer-brand fund, and heavy industry.</p>
+
+  <div class="grid" id="grid">
+
+    <article class="tile">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b1">
+        <span class="kicker">Rokt · 2024–present</span>
+        <span class="t-title">Incrementality platform</span>
+        <span class="metric"><b>$10M</b><span>net-new advertiser spend</span></span>
+        <ul class="tags"><li>Causal inference</li><li>Experimentation</li><li>Python</li><li>SQL</li></ul>
+      </button>
+      <div class="tile-body" id="b1" hidden>
+        <p class="ctx">Rokt's pitch to advertisers is conversion lift. Lift you cannot attribute causally is a claim rather than a measurement — it can't be distinguished from shoppers who were going to convert anyway.</p>
+        <p>I defined and shipped the incrementality platform that measures whether Rokt's conversion lift is actually causal, and made its output the number advertisers buy against.</p>
+        <p><strong>Result:</strong> $10M in net-new advertiser spend secured.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> The number was sold against, not just reviewed internally — advertisers committed budget on the strength of it, which is a harder test than an internal sign-off.</p>
+      </div>
+    </article>
+
+    <article class="tile">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b2">
+        <span class="kicker">Rokt</span>
+        <span class="t-title">Checkout-abandonment suppression</span>
+        <span class="metric"><b>$2.5bn</b><span>partner revenue protected</span></span>
+        <ul class="tags"><li>Logistic regression</li><li>Python</li><li>Marketplace</li></ul>
+      </button>
+      <div class="tile-body" id="b2" hidden>
+        <p class="ctx">Rokt's ads run inside its partners' checkout flows. An ad shown at the wrong moment doesn't just underperform — it can cost the partner the sale it was placed next to.</p>
+        <p>I shipped the logistic regression model that predicts when a shopper is likely to abandon checkout and suppresses Rokt's own ads in that moment.</p>
+        <p><strong>Result:</strong> $2.5bn in partner revenue loss prevented.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> Suppression trades Rokt's ad revenue for the partner's checkout revenue, so the threshold is a business decision rather than a model-fit one: it belongs where protected partner revenue exceeds the Rokt revenue given up, not where F1 peaks.</p>
+      </div>
+    </article>
+
+    <article class="tile">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b3">
+        <span class="kicker">Rokt</span>
+        <span class="t-title">Payment-page ad placement</span>
+        <span class="metric"><b>$75M</b><span>revenue, tripled</span></span>
+        <ul class="tags"><li>Experiment tooling</li><li>Instrumentation</li><li>SQL</li></ul>
+      </button>
+      <div class="tile-body" id="b3" hidden>
+        <p class="ctx">A new ad placement only earns out if partners can actually get it live. Launch-to-live time, not demand, was the binding constraint.</p>
+        <p>I shipped the experimentation tooling that cut partner launch-to-live time on a new payment-page placement.</p>
+        <p><strong>Result:</strong> placement revenue tripled to $75M.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> Launch-to-live time was the mechanism and it was directly observable in partner ramp times, so the tooling's effect could be read before it showed up in revenue.</p>
+      </div>
+    </article>
+
+    <article class="tile">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b4">
+        <span class="kicker">Rokt</span>
+        <span class="t-title">Upsells alpha, A/B program</span>
+        <span class="metric"><b>+20%</b><span>value per transaction</span></span>
+        <ul class="tags"><li>A/B testing</li><li>Metric design</li></ul>
+      </button>
+      <div class="tile-body" id="b4" hidden>
+        <p class="ctx">An alpha Upsells product needed to prove it beat the client's existing baseline before it could earn wider rollout.</p>
+        <p>I ran the A/B program behind it — the test design, the metric definitions, and the read.</p>
+        <p><strong>Result:</strong> a sustained 20% lift in value per transaction over client baseline.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> The lift was measured against the client's own baseline and held across windows rather than landing in a single test read — the load-bearing word is <em>sustained</em>.</p>
+      </div>
+    </article>
+
+    <article class="tile">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b5">
+        <span class="kicker">Rokt</span>
+        <span class="t-title">Budget allocation model</span>
+        <span class="metric"><b>+2%</b><span>network revenue per transaction</span></span>
+        <ul class="tags"><li>Prediction</li><li>Auction</li><li>Python</li></ul>
+      </button>
+      <div class="tile-body" id="b5" hidden>
+        <p class="ctx">Advertiser budget parked where it doesn't convert is inventory the auction never gets to sell.</p>
+        <p>I shipped the budget allocation model that predicts where advertiser spend actually converts, freeing the stranded inventory back into the auction.</p>
+        <p><strong>Result:</strong> network revenue per transaction up 2%.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> A reallocation model can post a lift just by moving spend toward conversions that were already going to happen. The honest test is whether <em>network</em> revenue per transaction rises, not whether the reallocated campaigns look good — which is why that was the metric.</p>
+      </div>
+    </article>
+
+    <article class="tile">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b6">
+        <span class="kicker">Rokt</span>
+        <span class="t-title">Campaign-diagnosis agent &amp; its evals</span>
+        <span class="metric"><b>372</b><span>incidents classified</span></span>
+        <ul class="tags"><li>LLM evals</li><li>Agents</li><li>NLP</li><li>Classification</li></ul>
+      </button>
+      <div class="tile-body" id="b6" hidden>
+        <p class="ctx">Campaign issues were being diagnosed by hand, and nobody knew which classes of failure the existing detection actually covered.</p>
+        <p>I shipped an LLM agent that diagnoses campaign issues, then graded its outputs and classified 372 incidents drawn from 11 months of chat logs.</p>
+        <p><strong>Result:</strong> detection coverage redesigned against the failure classes the incident corpus actually contained.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> The agent's outputs were graded rather than assumed correct, and the 372-incident corpus set the denominator: coverage was measured against failures that had actually occurred, not against a hypothesized failure list.</p>
+      </div>
+    </article>
+
+    <article class="tile">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b7">
+        <span class="kicker">Humankind · 2022–2024</span>
+        <span class="t-title">First experimentation program</span>
+        <span class="metric"><b>+230%</b><span>usage-fee revenue</span></span>
+        <ul class="tags"><li>Experimentation</li><li>Funnel analysis</li></ul>
+      </button>
+      <div class="tile-body" id="b7" hidden>
+        <p class="ctx">Embedded chat connecting e-commerce shoppers with product experts. Format, copy and placement decisions were being made without a way to test them.</p>
+        <p>I owned the shopper funnel and built the company's first experimentation program, which became how the team decided what shipped.</p>
+        <p><strong>Result:</strong> shopper onboarding tripled and usage-fee revenue grew 230%.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> Before the program there was no counterfactual for a format, copy or placement change. Its first job was making “it worked” a falsifiable claim; the revenue number is what survived that.</p>
+      </div>
+    </article>
+
+    <article class="tile">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b8">
+        <span class="kicker">Humankind</span>
+        <span class="t-title">Analytics function from zero</span>
+        <span class="metric"><b>−90%</b><span>data-request turnaround</span></span>
+        <ul class="tags"><li>Python</li><li>Rockset</li><li>SQL</li><li>Mentoring</li></ul>
+      </button>
+      <div class="tile-body" id="b8" hidden>
+        <p class="ctx">Sole data hire at an early-stage company with no analytics function and no one else to build it.</p>
+        <p>I built the function from zero — a Python, Rockset and SQL query repo — and trained two non-technical reports to serve requests from it themselves.</p>
+        <p><strong>Result:</strong> data-request turnaround cut 90%.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> The 90% is a turnaround measure, not a volume one. The real test was that two non-technical reports could serve requests without me — the function had to outlive any query I personally wrote.</p>
+      </div>
+    </article>
+
+    <article class="tile">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b9">
+        <span class="kicker">Humankind</span>
+        <span class="t-title">What actually drives conversion</span>
+        <span class="metric"><b>+26%</b><span>purchase conversion</span></span>
+        <ul class="tags"><li>Regression</li><li>Attribution</li><li>Roadmap</li></ul>
+      </button>
+      <div class="tile-body" id="b9" hidden>
+        <p class="ctx">The product had several plausible conversion levers and no evidence about which of them carried revenue.</p>
+        <p>I built the regression models that traced revenue to personalized recommendations, expert response time and retargeting, then drove the product roadmap changes those models implied.</p>
+        <p><strong>Result:</strong> purchase conversion up 26%.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> The models identified candidate levers; the 26% is the measured outcome after the roadmap changes shipped, not the effect size the models predicted.</p>
+      </div>
+    </article>
+
+    <article class="tile">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b10">
+        <span class="kicker">CircleUp · 2021–2022</span>
+        <span class="t-title">NLP-driven investment diligence</span>
+        <span class="metric"><b>$17M</b><span>deployed at ~3x return</span></span>
+        <ul class="tags"><li>NLP</li><li>Sentiment analysis</li><li>Diligence</li></ul>
+      </button>
+      <div class="tile-body" id="b10" hidden>
+        <p class="ctx">A consumer-brand venture fund built on an in-house data platform, screening far more candidates than a team could diligence by hand.</p>
+        <p>I owned quantitative due diligence and built the NLP and sentiment models that narrowed 30 candidates down to 6 investments.</p>
+        <p><strong>Result:</strong> $17M deployed at roughly 3x return.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> The ~3x is realized, not modeled. The NLP work narrowed the funnel from 30 to 6 — the return is what those 6 investments actually did afterward.</p>
+      </div>
+    </article>
+
+    <article class="tile">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b11">
+        <span class="kicker">CircleUp</span>
+        <span class="t-title">Capital-as-a-service</span>
+        <span class="metric"><b>4x</b><span>faster term sheets</span></span>
+        <ul class="tags"><li>Productionizing ML</li><li>Product ownership</li></ul>
+      </button>
+      <div class="tile-body" id="b11" hidden>
+        <p class="ctx">Speed to term sheet is the product in capital-as-a-service — it is what a founder is choosing between lenders on.</p>
+        <p>I owned performance of the product and partnered with ML engineers to productionize the value signals the underwriting depended on.</p>
+        <p><strong>Result:</strong> term sheets delivered 4x faster than the industry standard.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> The 4x is against an external industry benchmark rather than a before-and-after against our own prior pace.</p>
+      </div>
+    </article>
+
+    <article class="tile">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b12">
+        <span class="kicker">Partners in Performance · 2020–2021</span>
+        <span class="t-title">Quantifying an unmeasured operation</span>
+        <span class="metric"><b>$33M</b><span>annual loss eliminated</span></span>
+        <ul class="tags"><li>Python</li><li>SQL</li><li>Pipelines</li></ul>
+      </button>
+      <div class="tile-body" id="b12" hidden>
+        <p class="ctx">A $350M/year gold mine had an operation nobody was measuring, so its losses were invisible and therefore unprioritized.</p>
+        <p>I built the Python/SQL pipeline that quantified the operation for the first time and ranked its loss drivers by size.</p>
+        <p><strong>Result:</strong> roughly $33M in annual production loss eliminated.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> The operation had never been measured, so the baseline had to be constructed rather than observed — and the loss drivers were ranked by size before anything was changed, so the sequencing wasn't retrofitted to the result.</p>
+      </div>
+    </article>
+
+    <article class="tile">
+      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b13">
+        <span class="kicker">Partners in Performance</span>
+        <span class="t-title">KPI rebuild across 10 sales teams</span>
+        <span class="metric"><b>$25M</b><span>annualized revenue added</span></span>
+        <ul class="tags"><li>SQL</li><li>Tableau</li><li>Metric design</li></ul>
+      </button>
+      <div class="tile-body" id="b13" hidden>
+        <p class="ctx">Ten declining sales teams, none of them working from a shared definition of what good looked like.</p>
+        <p>I defined their north-star and leading KPIs in SQL and Tableau, then drove the upsell, cross-sell and churn plays to adoption across all ten.</p>
+        <p><strong>Result:</strong> $25M in annualized revenue added.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> Ten teams meant each team's change could be read against the other nine rather than only against its own past, which separates the plays that worked from a market-wide move.</p>
+      </div>
+    </article>
+
+  </div>
+  <p class="hint">Select any tile to read the full case. Press <kbd>Esc</kbd> to close.</p>
+</main>
+
+</div>
+
+<script>
+(function(){
+  var grid = document.getElementById('grid');
+  function close(btn){
+    btn.setAttribute('aria-expanded','false');
+    document.getElementById(btn.getAttribute('aria-controls')).hidden = true;
+    btn.closest('.tile').classList.remove('open');
+  }
+  function closeAll(){
+    grid.querySelectorAll('.tile-head[aria-expanded="true"]').forEach(close);
+  }
+  grid.addEventListener('click', function(e){
+    var btn = e.target.closest('.tile-head');
+    if(!btn) return;
+    var isOpen = btn.getAttribute('aria-expanded') === 'true';
+    closeAll();
+    if(isOpen) return;
+    btn.setAttribute('aria-expanded','true');
+    document.getElementById(btn.getAttribute('aria-controls')).hidden = false;
+    btn.closest('.tile').classList.add('open');
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeAll();
+  });
+})();
+</script>
+</body>
+</html>
