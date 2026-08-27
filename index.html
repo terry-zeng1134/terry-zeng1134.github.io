@@ -115,6 +115,10 @@ a:hover{text-decoration:underline;}
   line-height:1.05; color:var(--ink);
 }
 .metric span{display:block; font-size:12.5px; color:var(--muted); margin-top:2px;}
+.method{
+  display:block; font-size:13px; line-height:1.45; color:var(--ink-2);
+  margin-bottom:12px; flex:0 0 auto;
+}
 .tags{list-style:none; margin-top:auto; display:flex; flex-wrap:wrap; gap:5px; margin:0; padding:0;}
 .tags li{
   font-size:11.5px; color:var(--ink-2); border:1px solid var(--line);
@@ -137,6 +141,15 @@ a:hover{text-decoration:underline;}
 .tile-body .knew strong{color:var(--ink); font-weight:650;}
 
 .hint{margin:18px 0 0; font-size:12.5px; color:var(--muted);}
+
+.writing{margin-top:52px; padding-top:30px; border-top:1px solid var(--line);}
+.writing .empty{
+  margin:0; padding:18px 16px; font-size:13.5px; color:var(--muted);
+  border:1px dashed var(--line); border-radius:var(--radius); text-align:center;
+}
+.post{padding:14px 0; border-bottom:1px solid var(--line);}
+.post h3{margin:0 0 4px; font-size:15px; font-weight:650;}
+.post p{margin:0; font-size:14px; color:var(--ink-2);}
 
 @media (max-width:860px){
   .wrap{grid-template-columns:1fr; gap:40px; padding:36px 22px 72px;}
@@ -203,6 +216,7 @@ a:hover{text-decoration:underline;}
         <span class="kicker">Rokt · 2024–present</span>
         <span class="t-title">Incrementality platform</span>
         <span class="metric"><b>$10M</b><span>net-new advertiser spend</span></span>
+        <span class="method">Causal measurement of conversion lift, productized into a platform.</span>
         <ul class="tags"><li>Causal inference</li><li>Experimentation</li><li>Python</li><li>SQL</li></ul>
       </button>
       <div class="tile-body" id="b1" hidden>
@@ -218,6 +232,7 @@ a:hover{text-decoration:underline;}
         <span class="kicker">Rokt</span>
         <span class="t-title">Checkout-abandonment suppression</span>
         <span class="metric"><b>$2.5bn</b><span>partner revenue protected</span></span>
+        <span class="method">Logistic regression on abandonment risk, gating ad delivery inside checkout.</span>
         <ul class="tags"><li>Logistic regression</li><li>Python</li><li>Marketplace</li></ul>
       </button>
       <div class="tile-body" id="b2" hidden>
@@ -233,6 +248,7 @@ a:hover{text-decoration:underline;}
         <span class="kicker">Rokt</span>
         <span class="t-title">Payment-page ad placement</span>
         <span class="metric"><b>$75M</b><span>revenue, tripled</span></span>
+        <span class="method">Experiment tooling and instrumentation that cut partner launch-to-live time.</span>
         <ul class="tags"><li>Experiment tooling</li><li>Instrumentation</li><li>SQL</li></ul>
       </button>
       <div class="tile-body" id="b3" hidden>
@@ -248,6 +264,7 @@ a:hover{text-decoration:underline;}
         <span class="kicker">Rokt</span>
         <span class="t-title">Upsells alpha, A/B program</span>
         <span class="metric"><b>+20%</b><span>value per transaction</span></span>
+        <span class="method">A/B design, metric definitions and readout against the client's own baseline.</span>
         <ul class="tags"><li>A/B testing</li><li>Metric design</li></ul>
       </button>
       <div class="tile-body" id="b4" hidden>
@@ -263,6 +280,7 @@ a:hover{text-decoration:underline;}
         <span class="kicker">Rokt</span>
         <span class="t-title">Budget allocation model</span>
         <span class="metric"><b>+2%</b><span>network revenue per transaction</span></span>
+        <span class="method">Predictive allocation of advertiser spend, freeing inventory back into the auction.</span>
         <ul class="tags"><li>Prediction</li><li>Auction</li><li>Python</li></ul>
       </button>
       <div class="tile-body" id="b5" hidden>
@@ -278,6 +296,7 @@ a:hover{text-decoration:underline;}
         <span class="kicker">Rokt</span>
         <span class="t-title">Campaign-diagnosis agent &amp; its evals</span>
         <span class="metric"><b>372</b><span>incidents classified</span></span>
+        <span class="method">An LLM agent plus a graded eval set built from 11 months of chat logs.</span>
         <ul class="tags"><li>LLM evals</li><li>Agents</li><li>NLP</li><li>Classification</li></ul>
       </button>
       <div class="tile-body" id="b6" hidden>
@@ -293,6 +312,7 @@ a:hover{text-decoration:underline;}
         <span class="kicker">Humankind · 2022–2024</span>
         <span class="t-title">First experimentation program</span>
         <span class="metric"><b>+230%</b><span>usage-fee revenue</span></span>
+        <span class="method">The company's first experimentation program, run on the shopper funnel.</span>
         <ul class="tags"><li>Experimentation</li><li>Funnel analysis</li></ul>
       </button>
       <div class="tile-body" id="b7" hidden>
@@ -308,6 +328,7 @@ a:hover{text-decoration:underline;}
         <span class="kicker">Humankind</span>
         <span class="t-title">Analytics function from zero</span>
         <span class="metric"><b>−90%</b><span>data-request turnaround</span></span>
+        <span class="method">A Python, Rockset and SQL query repo — and two non-technical reports trained on it.</span>
         <ul class="tags"><li>Python</li><li>Rockset</li><li>SQL</li><li>Mentoring</li></ul>
       </button>
       <div class="tile-body" id="b8" hidden>
@@ -323,6 +344,7 @@ a:hover{text-decoration:underline;}
         <span class="kicker">Humankind</span>
         <span class="t-title">What actually drives conversion</span>
         <span class="metric"><b>+26%</b><span>purchase conversion</span></span>
+        <span class="method">Regression attribution across recommendations, response time and retargeting.</span>
         <ul class="tags"><li>Regression</li><li>Attribution</li><li>Roadmap</li></ul>
       </button>
       <div class="tile-body" id="b9" hidden>
@@ -338,6 +360,7 @@ a:hover{text-decoration:underline;}
         <span class="kicker">CircleUp · 2021–2022</span>
         <span class="t-title">NLP-driven investment diligence</span>
         <span class="metric"><b>$17M</b><span>deployed at ~3x return</span></span>
+        <span class="method">NLP and sentiment models narrowing 30 candidates to 6 investments.</span>
         <ul class="tags"><li>NLP</li><li>Sentiment analysis</li><li>Diligence</li></ul>
       </button>
       <div class="tile-body" id="b10" hidden>
@@ -353,6 +376,7 @@ a:hover{text-decoration:underline;}
         <span class="kicker">CircleUp</span>
         <span class="t-title">Capital-as-a-service</span>
         <span class="metric"><b>4x</b><span>faster term sheets</span></span>
+        <span class="method">Value signals productionized with ML engineers; owned product performance.</span>
         <ul class="tags"><li>Productionizing ML</li><li>Product ownership</li></ul>
       </button>
       <div class="tile-body" id="b11" hidden>
@@ -368,6 +392,7 @@ a:hover{text-decoration:underline;}
         <span class="kicker">Partners in Performance · 2020–2021</span>
         <span class="t-title">Quantifying an unmeasured operation</span>
         <span class="metric"><b>$33M</b><span>annual loss eliminated</span></span>
+        <span class="method">A Python/SQL pipeline that quantified an operation nobody was measuring.</span>
         <ul class="tags"><li>Python</li><li>SQL</li><li>Pipelines</li></ul>
       </button>
       <div class="tile-body" id="b12" hidden>
@@ -383,6 +408,7 @@ a:hover{text-decoration:underline;}
         <span class="kicker">Partners in Performance</span>
         <span class="t-title">KPI rebuild across 10 sales teams</span>
         <span class="metric"><b>$25M</b><span>annualized revenue added</span></span>
+        <span class="method">North-star and leading KPIs in SQL and Tableau, driven to adoption across ten teams.</span>
         <ul class="tags"><li>SQL</li><li>Tableau</li><li>Metric design</li></ul>
       </button>
       <div class="tile-body" id="b13" hidden>
@@ -395,6 +421,19 @@ a:hover{text-decoration:underline;}
 
   </div>
   <p class="hint">Select any tile to read the full case. Press <kbd>Esc</kbd> to close.</p>
+
+  <section class="writing">
+    <h2 class="work-head">Writing</h2>
+    <p class="work-sub">Notes on experimentation, causal measurement and marketplace modeling.</p>
+    <!-- Add a post by copying this block:
+    <article class="post">
+      <h3><a href="POST_URL">Post title</a></h3>
+      <p>One-sentence description of what the post argues.</p>
+    </article>
+    -->
+    <p class="empty">Nothing published yet.</p>
+  </section>
+
 </main>
 
 </div>
