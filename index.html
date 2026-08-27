@@ -134,6 +134,10 @@ a:hover{text-decoration:underline;}
 }
 .tile-body p:last-child{margin-bottom:0;}
 .tile-body .ctx{color:var(--muted);}
+.tile-body .rolemeta{
+  font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:10px;
+}
 .tile-body .knew{
   margin-top:12px; padding-top:11px; border-top:1px solid var(--line);
   font-size:14px; color:var(--ink-2);
@@ -141,6 +145,18 @@ a:hover{text-decoration:underline;}
 .tile-body .knew strong{color:var(--ink); font-weight:650;}
 
 .hint{margin:18px 0 0; font-size:12.5px; color:var(--muted);}
+
+.also{margin-top:52px; padding-top:30px; border-top:1px solid var(--line);}
+.alsolist{margin:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:16px 32px;}
+.alsolist dt{font-size:14px; font-weight:650; color:var(--ink); margin-bottom:3px;}
+.alsolist dt span{font-weight:400; color:var(--muted); font-size:12.5px;}
+.alsolist dd{margin:0; font-size:13.5px; color:var(--ink-2); line-height:1.5;}
+.alsolist dd b{font-weight:650; color:var(--ink);}
+
+.interests{
+  margin:22px 0 0; padding-top:14px; border-top:1px solid var(--line);
+  font-size:12.5px; color:var(--muted);
+}
 
 .writing{margin-top:52px; padding-top:30px; border-top:1px solid var(--line);}
 .writing .empty{
@@ -175,11 +191,11 @@ a:hover{text-decoration:underline;}
   <h2>Skills</h2>
   <dl>
     <dt>Experimentation</dt>
-    <dd>A/B test design and analysis, experiment tooling and instrumentation, north-star and leading-indicator metric design, funnel analysis</dd>
+    <dd>A/B test design and analysis, holdout and incrementality experiments, difference-in-differences, experiment tooling and instrumentation, north-star and leading-indicator metric design, funnel analysis</dd>
     <dt>Analysis &amp; modeling</dt>
-    <dd>Regression modeling, NLP and sentiment analysis, LLM output grading and agent evals</dd>
+    <dd>Logistic and regression modeling, NLP and sentiment analysis, TF-IDF, LLM output grading and agent evals</dd>
     <dt>Stack</dt>
-    <dd>Python, SQL, Jupyter, Rockset, dbt, Snowflake, Airflow, Tableau, Looker, Google Cloud, Claude Code, OpenAI API</dd>
+    <dd>Python, SQL, PySpark, pandas, scikit-learn, Jupyter, Rockset, dbt, Snowflake, Airflow, BigQuery, Tableau, Sigma, git, Claude Code, Codex, Devin</dd>
     <dt>Languages</dt>
     <dd>English, French, Mandarin, Cantonese</dd>
   </dl>
@@ -187,24 +203,26 @@ a:hover{text-decoration:underline;}
   <h2>Education</h2>
   <dl>
     <dd><strong>McGill University</strong> — BA, Joint Honors Economics and Finance, Minor in Computer Science</dd>
-    <dd style="margin-top:4px;color:var(--muted);font-size:13px;">Applied Machine Learning · Honors Econometrics &amp; Statistics I–II · Software Systems</dd>
+    <dd style="margin-top:4px;color:var(--muted);font-size:13px;">Applied Machine Learning · Econometrics &amp; Statistics · Software Systems</dd>
   </dl>
 
   <h2>Elsewhere</h2>
   <ul class="links">
     <li><a href="mailto:terry.zeng17@gmail.com">terry.zeng17@gmail.com</a></li>
-    <li><a href="https://www.linkedin.com/in/terryzeng">LinkedIn</a></li>
+    <li><a href="https://www.linkedin.com/in/terry-zeng">LinkedIn</a></li>
     <li><a href="https://github.com/terry-zeng1134">GitHub</a></li>
     <li><a href="resume.html">Résumé</a></li>
   </ul>
+
+  <p class="interests">Music production (400k+ streams) · skiing · tennis</p>
 </header>
 
 <main>
   <h2 class="work-head">Selected work in experimentation, causal inference and marketplace ML</h2>
-  <p class="work-sub">Thirteen pieces of shipped work across a three-sided ads marketplace, an e-commerce chat product, a consumer-brand fund, and heavy industry.</p>
+  <p class="work-sub">Six cases in depth, across a three-sided ads marketplace, an e-commerce chat product and a consumer-brand fund.</p>
 
   <dl class="orgkey">
-    <div><dt>Rokt</dt><dd>Three-sided ads marketplace for e-commerce platforms</dd></div>
+    <div><dt>Rokt</dt><dd>Marketplace for e-commerce confirmation-page and in-transaction ads</dd></div>
     <div><dt>Humankind</dt><dd>Embedded chat connecting e-commerce shoppers with product experts <span>· acquired</span></dd></div>
     <div><dt>CircleUp</dt><dd>Consumer-brand VC fund built on an in-house data platform <span>· acquired</span></dd></div>
     <div><dt>Partners in Performance</dt><dd>Operational-improvement consultancy <span>· now part of Accenture</span></dd></div>
@@ -215,213 +233,118 @@ a:hover{text-decoration:underline;}
     <article class="tile">
       <button class="tile-head" type="button" aria-expanded="false" aria-controls="b1">
         <span class="kicker">Rokt · 2024–present</span>
-        <span class="t-title">Incrementality platform</span>
+        <span class="t-title">Incrementality measurement</span>
         <span class="metric"><b>$10M</b><span>net-new advertiser spend</span></span>
-        <span class="method">Causal measurement of conversion lift, productized into a platform.</span>
-        <ul class="tags"><li>Causal inference</li><li>Experimentation</li><li>Python</li><li>SQL</li></ul>
+        <span class="method">Experiments that isolate product-driven conversions from baseline.</span>
+        <ul class="tags"><li>Causal inference</li><li>Experimentation</li><li>GTM enablement</li></ul>
       </button>
       <div class="tile-body" id="b1" hidden>
-        <p class="ctx">Rokt's pitch to advertisers is conversion lift. Lift you cannot attribute causally is a claim rather than a measurement — it can't be distinguished from shoppers who were going to convert anyway.</p>
-        <p>I defined and shipped the incrementality platform that measures whether Rokt's conversion lift is actually causal, and made its output the number advertisers buy against.</p>
-        <p><strong>Result:</strong> $10M in net-new advertiser spend secured.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> The number was sold against, not just reviewed internally — advertisers committed budget on the strength of it, which is a harder test than an internal sign-off.</p>
+        <p class="rolemeta">Senior Data Scientist, Product · Jul 2024 – Present</p>
+        <p class="ctx">Rokt sells conversion lift. Lift that can't be separated from conversions which would have happened anyway is a claim rather than a measurement — and an advertiser has no reason to pay for it.</p>
+        <p>I designed the incrementality experiments that isolate product-driven conversions from baseline, then equipped GTM and cross-functional stakeholders to sell the measured lift.</p>
+        <p><strong>Result:</strong> $10M in net-new advertiser spend won.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> The experiment defines the baseline the lift is measured against, so isolating product-driven conversions <em>is</em> the argument — and the number then had to survive advertisers deciding whether to commit budget against it, which is a harder test than internal review.</p>
       </div>
     </article>
 
     <article class="tile">
       <button class="tile-head" type="button" aria-expanded="false" aria-controls="b2">
         <span class="kicker">Rokt</span>
-        <span class="t-title">Checkout-abandonment suppression</span>
-        <span class="metric"><b>$2.5bn</b><span>partner revenue protected</span></span>
-        <span class="method">Logistic regression on abandonment risk, gating ad delivery inside checkout.</span>
-        <ul class="tags"><li>Logistic regression</li><li>Python</li><li>Marketplace</li></ul>
+        <span class="t-title">Churn-risk auction reordering</span>
+        <span class="metric"><b>$2.5B</b><span>partner revenue loss prevented</span></span>
+        <span class="method">Logistic regression on shopper churn, reordering the auction.</span>
+        <ul class="tags"><li>Logistic regression</li><li>Production ML</li><li>Marketplace</li></ul>
       </button>
       <div class="tile-body" id="b2" hidden>
-        <p class="ctx">Rokt's ads run inside its partners' checkout flows. An ad shown at the wrong moment doesn't just underperform — it can cost the partner the sale it was placed next to.</p>
-        <p>I shipped the logistic regression model that predicts when a shopper is likely to abandon checkout and suppresses Rokt's own ads in that moment.</p>
-        <p><strong>Result:</strong> $2.5bn in partner revenue loss prevented.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> Suppression trades Rokt's ad revenue for the partner's checkout revenue, so the threshold is a business decision rather than a model-fit one: it belongs where protected partner revenue exceeds the Rokt revenue given up, not where F1 peaks.</p>
+        <p class="ctx">Rokt's ads sit inside its partners' checkout and confirmation flows. An advertiser that raises a shopper's churn risk can cost the partner far more than that ad placement earns.</p>
+        <p>I productionized the logistic regression model that predicts shopper churn and reorders the auction to prioritize advertisers who minimize that risk.</p>
+        <p><strong>Result:</strong> $2.5B in partner revenue loss prevented.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> Reordering trades auction yield against partner churn, so the ranking function has to price churn risk in the same units as bid value. That calibration is a business decision, not a model-fit one — the model can be well-calibrated and the ranking still wrong.</p>
       </div>
     </article>
 
     <article class="tile">
       <button class="tile-head" type="button" aria-expanded="false" aria-controls="b3">
         <span class="kicker">Rokt</span>
-        <span class="t-title">Payment-page ad placement</span>
-        <span class="metric"><b>$75M</b><span>revenue, tripled</span></span>
-        <span class="method">Experiment tooling and instrumentation that cut partner launch-to-live time.</span>
-        <ul class="tags"><li>Experiment tooling</li><li>Instrumentation</li><li>SQL</li></ul>
+        <span class="t-title">Conversion elastic bidding</span>
+        <span class="metric"><b>+15%</b><span>campaign spend</span></span>
+        <span class="method">0-to-1 launch; bids adjusted dynamically for CPA efficiency.</span>
+        <ul class="tags"><li>Difference-in-differences</li><li>Causal inference</li><li>Bidding</li></ul>
       </button>
       <div class="tile-body" id="b3" hidden>
-        <p class="ctx">A new ad placement only earns out if partners can actually get it live. Launch-to-live time, not demand, was the binding constraint.</p>
-        <p>I shipped the experimentation tooling that cut partner launch-to-live time on a new payment-page placement.</p>
-        <p><strong>Result:</strong> placement revenue tripled to $75M.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> Launch-to-live time was the mechanism and it was directly observable in partner ramp times, so the tooling's effect could be read before it showed up in revenue.</p>
+        <p class="ctx">Static bids leave advertiser budget stranded on campaigns that could absorb more spend efficiently, and overspend where they can't.</p>
+        <p>I led the 0-to-1 launch of conversion elastic bidding, adjusting bids dynamically to maximize cost-per-conversion efficiency, and measured the impact with difference-in-differences.</p>
+        <p><strong>Result:</strong> +15% spend on campaigns.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> A bidding change is hard to A/B cleanly, because treated and control campaigns compete in the same auction and treatment leaks across the boundary. Difference-in-differences was the identification strategy chosen to handle that, rather than a split test that would have quietly measured the wrong thing.</p>
       </div>
     </article>
 
     <article class="tile">
       <button class="tile-head" type="button" aria-expanded="false" aria-controls="b4">
         <span class="kicker">Rokt</span>
-        <span class="t-title">Upsells alpha, A/B program</span>
-        <span class="metric"><b>+20%</b><span>value per transaction</span></span>
-        <span class="method">A/B design, metric definitions and readout against the client's own baseline.</span>
-        <ul class="tags"><li>A/B testing</li><li>Metric design</li></ul>
+        <span class="t-title">Campaign-diagnosis AI agent</span>
+        <span class="metric"><b>~$100M</b><span>advertiser spend unblocked</span></span>
+        <span class="method">Agent diagnosing infrastructure and delivery failures; 1.5 weeks to 24 hours.</span>
+        <ul class="tags"><li>AI agents</li><li>LLM evals</li><li>Diagnostics</li></ul>
       </button>
       <div class="tile-body" id="b4" hidden>
-        <p class="ctx">An alpha Upsells product needed to prove it beat the client's existing baseline before it could earn wider rollout.</p>
-        <p>I ran the A/B program behind it — the test design, the metric definitions, and the read.</p>
-        <p><strong>Result:</strong> a sustained 20% lift in value per transaction over client baseline.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> The lift was measured against the client's own baseline and held across windows rather than landing in a single test read — the load-bearing word is <em>sustained</em>.</p>
+        <p class="ctx">Campaign-delivery failures were diagnosed by hand, and advertiser spend sat blocked for as long as the tracing took.</p>
+        <p>I shipped an AI agent that diagnoses infrastructure and operational failures in campaign delivery.</p>
+        <p><strong>Result:</strong> resolution cut from 1.5 weeks to 24 hours, unblocking roughly $100M in advertiser spend.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> Resolution time is the metric that matters here, not diagnostic accuracy in isolation — a correct diagnosis that arrives in a week has already cost the spend it existed to protect.</p>
       </div>
     </article>
 
     <article class="tile">
       <button class="tile-head" type="button" aria-expanded="false" aria-controls="b5">
-        <span class="kicker">Rokt</span>
-        <span class="t-title">Budget allocation model</span>
-        <span class="metric"><b>+2%</b><span>network revenue per transaction</span></span>
-        <span class="method">Predictive allocation of advertiser spend, freeing inventory back into the auction.</span>
-        <ul class="tags"><li>Prediction</li><li>Auction</li><li>Python</li></ul>
+        <span class="kicker">Humankind · 2022–2024</span>
+        <span class="t-title">The company's first experimentation program</span>
+        <span class="metric"><b>+230%</b><span>usage-fee revenue</span></span>
+        <span class="method">Owned the shopper funnel; built the A/B program that decided what shipped.</span>
+        <ul class="tags"><li>Experimentation</li><li>Funnel analysis</li></ul>
       </button>
       <div class="tile-body" id="b5" hidden>
-        <p class="ctx">Advertiser budget parked where it doesn't convert is inventory the auction never gets to sell.</p>
-        <p>I shipped the budget allocation model that predicts where advertiser spend actually converts, freeing the stranded inventory back into the auction.</p>
-        <p><strong>Result:</strong> network revenue per transaction up 2%.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> A reallocation model can post a lift just by moving spend toward conversions that were already going to happen. The honest test is whether <em>network</em> revenue per transaction rises, not whether the reallocated campaigns look good — which is why that was the metric.</p>
+        <p class="rolemeta">Senior Data Analyst → Senior Data Scientist · Aug 2022 – Feb 2024</p>
+        <p class="ctx">Embedded chat connecting e-commerce shoppers with product experts. Formats, copy and placements shipped on judgment, because there was no mechanism to test them.</p>
+        <p>I owned the shopper funnel and built the company's A/B experimentation program, which became how the team decided what shipped.</p>
+        <p><strong>Result:</strong> shopper onboarding tripled and usage-fee revenue grew 230%.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> Before the program there was no counterfactual for a format or copy change at all. Its first job was making “it worked” a falsifiable statement; the revenue number is what survived that, not what preceded it.</p>
       </div>
     </article>
 
     <article class="tile">
       <button class="tile-head" type="button" aria-expanded="false" aria-controls="b6">
-        <span class="kicker">Rokt</span>
-        <span class="t-title">Campaign-diagnosis agent &amp; its evals</span>
-        <span class="metric"><b>372</b><span>incidents classified</span></span>
-        <span class="method">An LLM agent plus a graded eval set built from 11 months of chat logs.</span>
-        <ul class="tags"><li>LLM evals</li><li>Agents</li><li>NLP</li><li>Classification</li></ul>
+        <span class="kicker">CircleUp · 2021–2022</span>
+        <span class="t-title">NLP diligence pipeline</span>
+        <span class="metric"><b>$17M</b><span>deployed at ~3x return</span></span>
+        <span class="method">PySpark pipeline, TF-IDF over purchase-criteria language in reviews.</span>
+        <ul class="tags"><li>NLP</li><li>PySpark</li><li>TF-IDF</li></ul>
       </button>
       <div class="tile-body" id="b6" hidden>
-        <p class="ctx">Campaign issues were being diagnosed by hand, and nobody knew which classes of failure the existing detection actually covered.</p>
-        <p>I shipped an LLM agent that diagnoses campaign issues, then graded its outputs and classified 372 incidents drawn from 11 months of chat logs.</p>
-        <p><strong>Result:</strong> detection coverage redesigned against the failure classes the incident corpus actually contained.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> The agent's outputs were graded rather than assumed correct, and the 372-incident corpus set the denominator: coverage was measured against failures that had actually occurred, not against a hypothesized failure list.</p>
-      </div>
-    </article>
-
-    <article class="tile">
-      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b7">
-        <span class="kicker">Humankind · 2022–2024</span>
-        <span class="t-title">First experimentation program</span>
-        <span class="metric"><b>+230%</b><span>usage-fee revenue</span></span>
-        <span class="method">The company's first experimentation program, run on the shopper funnel.</span>
-        <ul class="tags"><li>Experimentation</li><li>Funnel analysis</li></ul>
-      </button>
-      <div class="tile-body" id="b7" hidden>
-        <p class="ctx">Embedded chat connecting e-commerce shoppers with product experts. Format, copy and placement decisions were being made without a way to test them.</p>
-        <p>I owned the shopper funnel and built the company's first experimentation program, which became how the team decided what shipped.</p>
-        <p><strong>Result:</strong> shopper onboarding tripled and usage-fee revenue grew 230%.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> Before the program there was no counterfactual for a format, copy or placement change. Its first job was making “it worked” a falsifiable claim; the revenue number is what survived that.</p>
-      </div>
-    </article>
-
-    <article class="tile">
-      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b8">
-        <span class="kicker">Humankind</span>
-        <span class="t-title">Analytics function from zero</span>
-        <span class="metric"><b>−90%</b><span>data-request turnaround</span></span>
-        <span class="method">A Python, Rockset and SQL query repo — and two non-technical reports trained on it.</span>
-        <ul class="tags"><li>Python</li><li>Rockset</li><li>SQL</li><li>Mentoring</li></ul>
-      </button>
-      <div class="tile-body" id="b8" hidden>
-        <p class="ctx">Sole data hire at an early-stage company with no analytics function and no one else to build it.</p>
-        <p>I built the function from zero — a Python, Rockset and SQL query repo — and trained two non-technical reports to serve requests from it themselves.</p>
-        <p><strong>Result:</strong> data-request turnaround cut 90%.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> The 90% is a turnaround measure, not a volume one. The real test was that two non-technical reports could serve requests without me — the function had to outlive any query I personally wrote.</p>
-      </div>
-    </article>
-
-    <article class="tile">
-      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b9">
-        <span class="kicker">Humankind</span>
-        <span class="t-title">What actually drives conversion</span>
-        <span class="metric"><b>+26%</b><span>purchase conversion</span></span>
-        <span class="method">Regression attribution across recommendations, response time and retargeting.</span>
-        <ul class="tags"><li>Regression</li><li>Attribution</li><li>Roadmap</li></ul>
-      </button>
-      <div class="tile-body" id="b9" hidden>
-        <p class="ctx">The product had several plausible conversion levers and no evidence about which of them carried revenue.</p>
-        <p>I built the regression models that traced revenue to personalized recommendations, expert response time and retargeting, then drove the product roadmap changes those models implied.</p>
-        <p><strong>Result:</strong> purchase conversion up 26%.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> The models identified candidate levers; the 26% is the measured outcome after the roadmap changes shipped, not the effect size the models predicted.</p>
-      </div>
-    </article>
-
-    <article class="tile">
-      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b10">
-        <span class="kicker">CircleUp · 2021–2022</span>
-        <span class="t-title">NLP-driven investment diligence</span>
-        <span class="metric"><b>$17M</b><span>deployed at ~3x return</span></span>
-        <span class="method">NLP and sentiment models narrowing 30 candidates to 6 investments.</span>
-        <ul class="tags"><li>NLP</li><li>Sentiment analysis</li><li>Diligence</li></ul>
-      </button>
-      <div class="tile-body" id="b10" hidden>
-        <p class="ctx">A consumer-brand venture fund built on an in-house data platform, screening far more candidates than a team could diligence by hand.</p>
-        <p>I owned quantitative due diligence and built the NLP and sentiment models that narrowed 30 candidates down to 6 investments.</p>
+        <p class="rolemeta">Analyst, Venture Equity · Nov 2021 – Aug 2022</p>
+        <p class="ctx">A consumer-brand fund screening far more candidates than a team could diligence by hand, with the signal buried in unstructured customer language.</p>
+        <p>I built the PySpark NLP pipeline that TF-IDF vectorized purchase-criteria language from product reviews, narrowing 30 candidates to 6 investments.</p>
         <p><strong>Result:</strong> $17M deployed at roughly 3x return.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> The ~3x is realized, not modeled. The NLP work narrowed the funnel from 30 to 6 — the return is what those 6 investments actually did afterward.</p>
-      </div>
-    </article>
-
-    <article class="tile">
-      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b11">
-        <span class="kicker">CircleUp</span>
-        <span class="t-title">Capital-as-a-service</span>
-        <span class="metric"><b>4x</b><span>faster term sheets</span></span>
-        <span class="method">Value signals productionized with ML engineers; owned product performance.</span>
-        <ul class="tags"><li>Productionizing ML</li><li>Product ownership</li></ul>
-      </button>
-      <div class="tile-body" id="b11" hidden>
-        <p class="ctx">Speed to term sheet is the product in capital-as-a-service — it is what a founder is choosing between lenders on.</p>
-        <p>I owned performance of the product and partnered with ML engineers to productionize the value signals the underwriting depended on.</p>
-        <p><strong>Result:</strong> term sheets delivered 4x faster than the industry standard.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> The 4x is against an external industry benchmark rather than a before-and-after against our own prior pace.</p>
-      </div>
-    </article>
-
-    <article class="tile">
-      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b12">
-        <span class="kicker">Partners in Performance · 2020–2021</span>
-        <span class="t-title">Quantifying an unmeasured operation</span>
-        <span class="metric"><b>$33M</b><span>annual loss eliminated</span></span>
-        <span class="method">A Python/SQL pipeline that quantified an operation nobody was measuring.</span>
-        <ul class="tags"><li>Python</li><li>SQL</li><li>Pipelines</li></ul>
-      </button>
-      <div class="tile-body" id="b12" hidden>
-        <p class="ctx">A $350M/year gold mine had an operation nobody was measuring, so its losses were invisible and therefore unprioritized.</p>
-        <p>I built the Python/SQL pipeline that quantified the operation for the first time and ranked its loss drivers by size.</p>
-        <p><strong>Result:</strong> roughly $33M in annual production loss eliminated.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> The operation had never been measured, so the baseline had to be constructed rather than observed — and the loss drivers were ranked by size before anything was changed, so the sequencing wasn't retrofitted to the result.</p>
-      </div>
-    </article>
-
-    <article class="tile">
-      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b13">
-        <span class="kicker">Partners in Performance</span>
-        <span class="t-title">KPI rebuild across 10 sales teams</span>
-        <span class="metric"><b>$25M</b><span>annualized revenue added</span></span>
-        <span class="method">North-star and leading KPIs in SQL and Tableau, driven to adoption across ten teams.</span>
-        <ul class="tags"><li>SQL</li><li>Tableau</li><li>Metric design</li></ul>
-      </button>
-      <div class="tile-body" id="b13" hidden>
-        <p class="ctx">Ten declining sales teams, none of them working from a shared definition of what good looked like.</p>
-        <p>I defined their north-star and leading KPIs in SQL and Tableau, then drove the upsell, cross-sell and churn plays to adoption across all ten.</p>
-        <p><strong>Result:</strong> $25M in annualized revenue added.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> Ten teams meant each team's change could be read against the other nine rather than only against its own past, which separates the plays that worked from a market-wide move.</p>
+        <p class="knew"><strong>How I knew it was real:</strong> The ~3x is realized, not modeled. The pipeline's job ended at narrowing the funnel — the return is what those 6 investments actually did afterward, which is the only version of this number that means anything.</p>
       </div>
     </article>
 
   </div>
   <p class="hint">Select any tile to read the full case. Press <kbd>Esc</kbd> to close.</p>
+
+  <section class="also">
+    <h2 class="work-head">Also shipped</h2>
+    <dl class="alsolist">
+      <div><dt>Upsells A/B program <span>· Rokt</span></dt><dd>Lifted revenue per transaction <b>+20%</b> above baseline, testing formats and offers across 2M+ transactions a day.</dd></div>
+      <div><dt>Payment-page ads <span>· Rokt</span></dt><dd>Tripled revenue to <b>$75M</b> by productizing do-no-harm holdout experiments, cutting partner onboarding time by two-thirds.</dd></div>
+      <div><dt>Mentorship program <span>· Rokt</span></dt><dd><b>70%</b> one-year promotion rate among the new-grad data scientists and analysts I mentored, pairing technical coaching with senior-stakeholder exposure.</dd></div>
+      <div><dt>Conversion drivers <span>· Humankind</span></dt><dd>Lifted purchase conversion <b>26%</b> with the logistic regression model that identified recommendations, expert response time and retargeting as drivers, then reprioritized the roadmap.</dd></div>
+      <div><dt>Client health scoring <span>· Humankind</span></dt><dd>Retained <b>10% of total ARR</b> with a churn-risk scoring model that directed product and CS prioritization.</dd></div>
+      <div><dt>Value-indicator models <span>· CircleUp</span></dt><dd>Opened a <b>$500M</b> investable universe with Python/SQL/BigQuery models that identified and validated new value indicators for startups.</dd></div>
+      <div><dt>Unmeasured mine operation <span>· Partners in Performance</span></dt><dd>Eliminated roughly <b>$33M</b> in annual production loss at a $350M/year gold mine with a Python/SQL pipeline that quantified it and ranked its loss drivers.</dd></div>
+      <div><dt>Sales KPI framework <span>· Partners in Performance</span></dt><dd>Added <b>$25M</b> in annualized revenue across 10 declining teams by defining their north-star and KPI framework in SQL/Tableau, then driving the plays to adoption.</dd></div>
+    </dl>
+  </section>
 
   <section class="writing">
     <h2 class="work-head">Writing</h2>
@@ -434,7 +357,6 @@ a:hover{text-decoration:underline;}
     -->
     <p class="empty">Nothing published yet.</p>
   </section>
-
 </main>
 
 </div>
@@ -442,13 +364,13 @@ a:hover{text-decoration:underline;}
 <script>
 (function(){
   var grid = document.getElementById('grid');
-  function close(btn){
+  function shut(btn){
     btn.setAttribute('aria-expanded','false');
     document.getElementById(btn.getAttribute('aria-controls')).hidden = true;
     btn.closest('.tile').classList.remove('open');
   }
   function closeAll(){
-    grid.querySelectorAll('.tile-head[aria-expanded="true"]').forEach(close);
+    grid.querySelectorAll('.tile-head[aria-expanded="true"]').forEach(shut);
   }
   grid.addEventListener('click', function(e){
     var btn = e.target.closest('.tile-head');
