@@ -37,6 +37,12 @@ a:hover{text-decoration:underline;}
 }
 .rail::-webkit-scrollbar{width:6px;}
 .rail::-webkit-scrollbar-thumb{background:var(--line-strong); border-radius:3px;}
+.avatar{
+  display:block; width:132px; height:132px;
+  object-fit:cover; object-position:center 37%;
+  border-radius:10px; border:1px solid var(--line);
+  margin:0 0 16px; background:var(--surface);
+}
 .name{
   font-size:27px; font-weight:700; letter-spacing:-.02em; margin:0 0 4px;
 }
