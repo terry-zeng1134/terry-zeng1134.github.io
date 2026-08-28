@@ -26,7 +26,25 @@
       <span class="shot"><img src="../../img/pay-plus-mockup.png" alt="A merchant payment page on a phone: an Apple Pay offer, served by Rokt, sits above the list of payment methods."></span>
     </figure>
 
-    <p>That makes a single quantity decisive. The return on a campaign is <em>(incremental uses &times; fee per use) &minus; (impressions &times; price)</em>, and everything turns on the word <em>incremental</em> — uses the ad caused, not uses that merely followed it. Apple Pay is already one of the most common ways to pay, so a large share of the shoppers who see the offer and then tap it were always going to tap it. We needed an experiment that could show people were using the payment method <em>because</em> we showed the ad.</p>
+    <p>That makes a single quantity decisive. The return on a campaign is arithmetic the buyer can do themselves:</p>
+
+    <p class="formula" role="math" aria-label="Return equals incremental uses times fee per use, minus impressions times price.">
+      <span class="f-var">Return</span>
+      <span class="f-op">=</span>
+      <span class="f-group">
+        <span class="f-expr">(<em>incremental</em> uses &times; fee per use)</span>
+        <span class="f-note">advertiser earns</span>
+      </span>
+      <span class="f-tail">
+        <span class="f-op">&minus;</span>
+        <span class="f-group">
+          <span class="f-expr">(impressions &times; price)</span>
+          <span class="f-note">advertiser pays</span>
+        </span>
+      </span>
+    </p>
+
+    <p>Everything turns on the word <em>incremental</em> — uses the ad caused, not uses that merely followed it. Apple Pay is already one of the most common ways to pay, so a large share of the shoppers who see the offer and then tap it were always going to tap it. We needed an experiment that could show people were using the payment method <em>because</em> we showed the ad.</p>
 
     <h2>Why the standard measurement fails</h2>
     <p>The industry-standard number is the attributed conversion — the shopper saw the offer, then paid with Apple Pay. On this placement it is close to uninformative. Everyone on a payment page is about to pay by <em>something</em>, and the baseline usage rate for a leading method is already high. Most attributed conversions are shoppers who would have tapped it anyway.</p>
@@ -60,7 +78,7 @@
     </div>
 
     <h2>Results</h2>
-    <p>Secured $10M in net-new advertiser spend.</p>
+    <p>$10M in net-new advertiser spend, committed against the readout. The experiment supplied the one term in that calculation the buyer could not observe for themselves — how many of the uses the ad caused — and it arrived with an interval and an MDE agreed before the test, so the media case could be audited rather than believed. I put the readouts in front of GTM and the buyer in the form they could sell — the lift, its interval, and what it did not cover; <span class="todo">fill in</span> which advertisers committed and over what period the spend was booked.</p>
     <p><span class="todo">fill in</span> — measured lift, with its confidence interval, and the split between new-to-method and existing users. Redacted axes are the norm here; the shape of the result is publishable where the level is not.</p>
 
     <h2>Discussion</h2>
