@@ -8,207 +8,7 @@
 <meta property="og:title" content="Terry Zeng — Senior Data Scientist, Product">
 <meta property="og:description" content="Experimentation, causal inference and marketplace ML. Selected work.">
 <meta property="og:type" content="profile">
-<style>
-:root{
-  --bg:#ffffff; --surface:#fbfbfc; --surface-hover:#f4f5f7;
-  --ink:#14161a; --ink-2:#464c54; --muted:#676d75;
-  --line:#e4e6ea; --line-strong:#cdd1d7;
-  --accent:#1f5fd6;
-  --radius:6px;
-  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-}
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#0f1113; --surface:#16191c; --surface-hover:#1d2125;
-    --ink:#eceef1; --ink-2:#b3bac1; --muted:#8b939b;
-    --line:#262b30; --line-strong:#394046;
-    --accent:#7aa7f5;
-  }
-}
-*{box-sizing:border-box;}
-html{-webkit-text-size-adjust:100%;}
-body{
-  margin:0; background:var(--bg); color:var(--ink);
-  font-family:var(--sans); font-size:15px; line-height:1.55;
-  -webkit-font-smoothing:antialiased;
-}
-a{color:var(--accent); text-decoration:none;}
-a:hover{text-decoration:underline;}
-
-.wrap{
-  max-width:1180px; margin:0 auto; padding:56px 32px 96px;
-  display:grid; grid-template-columns:280px minmax(0,1fr); gap:64px; align-items:start;
-}
-
-/* ---------- left rail ---------- */
-.rail{
-  position:sticky; top:56px;
-  max-height:calc(100vh - 96px); overflow-y:auto;
-  scrollbar-width:thin; overscroll-behavior:contain;
-}
-.rail::-webkit-scrollbar{width:6px;}
-.rail::-webkit-scrollbar-thumb{background:var(--line-strong); border-radius:3px;}
-.name{
-  font-size:27px; font-weight:700; letter-spacing:-.02em; margin:0 0 4px;
-}
-.role{font-size:15px; font-weight:600; color:var(--ink); margin:0 0 2px;}
-.discipline{font-size:14px; color:var(--ink-2); margin:0 0 18px;}
-.bio{font-size:14px; color:var(--ink-2); margin:0 0 18px;}
-.rail h2{
-  font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
-  color:var(--muted); margin:22px 0 8px;
-}
-.rail dl{margin:0; font-size:13.5px; color:var(--ink-2);}
-.rail dt{font-weight:600; color:var(--ink); margin-top:8px;}
-.rail dt:first-child{margin-top:0;}
-.rail dd{margin:0 0 2px;}
-.links{list-style:none; margin:0; padding:0; font-size:14px;}
-.links li{margin-bottom:5px;}
-.where{font-size:13.5px; color:var(--muted); margin:0 0 20px;}
-
-/* ---------- work grid ---------- */
-.work-head{margin:0 0 6px; font-size:20px; font-weight:700; letter-spacing:-.015em;}
-.work-sub{margin:0 0 22px; font-size:14px; color:var(--muted);}
-.orgkey{
-  margin:0 0 22px; padding:14px 16px;
-  border:1px solid var(--line); border-radius:var(--radius); background:var(--surface);
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:9px 24px;
-}
-.orgkey dt{font-size:13px; font-weight:650; color:var(--ink);}
-.orgkey dd{margin:0; font-size:12.5px; color:var(--muted); line-height:1.4;}
-.orgkey dd span{opacity:.75; font-style:italic;}
-
-.stripwrap{position:relative; margin-top:4px;}
-.stripwrap::after{
-  content:""; position:absolute; top:0; right:0; bottom:14px; width:56px;
-  pointer-events:none; background:linear-gradient(to right, transparent, var(--bg));
-}
-.grid{
-  display:flex; gap:12px; overflow-x:auto; padding-bottom:14px;
-  scroll-snap-type:x proximity; overscroll-behavior-x:contain;
-  scrollbar-width:thin; scrollbar-color:var(--line-strong) transparent;
-}
-.grid::-webkit-scrollbar{height:8px;}
-.grid::-webkit-scrollbar-thumb{background:var(--line-strong); border-radius:4px;}
-.grid::-webkit-scrollbar-track{background:transparent;}
-.grid .tile{flex:0 0 286px; scroll-snap-align:start;}
-.grid .tile.open{flex-basis:min(700px, 74vw);}
-.grid:focus-visible{outline:2px solid var(--accent); outline-offset:4px;}
-.tile{
-  border:1px solid var(--line); border-radius:var(--radius);
-  background:var(--surface); overflow:hidden;
-  transition:border-color .12s ease;
-  display:flex; flex-direction:column;
-}
-.tile:hover{border-color:var(--line-strong);}
-.tile.open{border-color:var(--line-strong); background:var(--bg);}
-
-.tile-head{
-  display:flex; flex-direction:column; flex:1 1 auto;
-  width:100%; text-align:left; cursor:pointer;
-  background:none; border:0; padding:14px 15px 15px; margin:0;
-  font:inherit; color:inherit;
-}
-.tile-head:hover{background:var(--surface-hover);}
-.tile.open .tile-head{background:none; padding-bottom:6px;}
-.tile-head:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
-
-.kicker{
-  display:block; font-size:11.5px; font-weight:600; letter-spacing:.05em;
-  text-transform:uppercase; color:var(--muted); margin-bottom:6px;
-}
-.t-title{
-  display:block; font-size:15px; font-weight:650; line-height:1.3;
-  letter-spacing:-.01em; margin-bottom:12px; color:var(--ink);
-}
-.metric{display:block; margin-bottom:14px; flex:0 0 auto;}
-.metric b{
-  display:block; font-size:29px; font-weight:600; letter-spacing:-.025em;
-  line-height:1.05; color:var(--ink);
-}
-.metric span{display:block; font-size:12.5px; color:var(--muted); margin-top:2px;}
-.method{
-  display:block; font-size:13px; line-height:1.45; color:var(--ink-2);
-  margin-bottom:12px; flex:0 0 auto;
-}
-.tags{list-style:none; margin-top:auto; display:flex; flex-wrap:wrap; gap:5px; margin:0; padding:0;}
-.tags li{
-  font-size:11.5px; color:var(--ink-2); border:1px solid var(--line);
-  border-radius:3px; padding:1px 6px; background:var(--bg);
-}
-.tile.open .tags li{background:var(--surface);}
-.tile.open .tags{margin-top:0;}
-
-.tile-body{padding:0 15px 16px;}
-.tile-body[hidden]{display:none;}
-.tile-body p{
-  margin:0 0 10px; font-size:14.5px; color:var(--ink-2); max-width:62ch;
-}
-.tile-body p:last-child{margin-bottom:0;}
-.tile-body .ctx{color:var(--muted);}
-.tile-body .rolemeta{
-  font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
-  color:var(--muted); margin-bottom:10px;
-}
-.tile-body .knew{
-  margin-top:12px; padding-top:11px; border-top:1px solid var(--line);
-  font-size:14px; color:var(--ink-2);
-}
-.tile-body .knew strong{color:var(--ink); font-weight:650;}
-
-.hint{margin:18px 0 0; font-size:12.5px; color:var(--muted);}
-
-.also{margin-top:52px; padding-top:30px; border-top:1px solid var(--line);}
-.alsolist{margin:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(330px,1fr)); gap:16px 32px;}
-.alsolist dt{font-size:14px; font-weight:650; color:var(--ink); margin-bottom:3px;}
-.alsolist dt span{font-weight:400; color:var(--muted); font-size:12.5px;}
-.alsolist dd{margin:0; font-size:13.5px; color:var(--ink-2); line-height:1.5;}
-.alsolist dd b{font-weight:650; color:var(--ink);}
-
-.interests{
-  margin:22px 0 0; padding-top:14px; border-top:1px solid var(--line);
-  font-size:12.5px; color:var(--muted);
-}
-
-.resume{margin-top:44px; padding-top:30px; border-top:1px solid var(--line);}
-.cv{margin-top:20px;}
-.cv-role{margin-bottom:22px;}
-.cv-role h3{margin:0 0 2px; font-size:15px; font-weight:650; color:var(--ink);}
-.cv-role h3 span{font-weight:400; font-style:italic; color:var(--muted); font-size:13.5px;}
-.cv-meta{margin:0 0 7px; font-size:13px; color:var(--ink-2); font-weight:550;}
-.cv-plain{margin:0 0 4px; font-size:13.5px; color:var(--ink-2); line-height:1.5;}
-.cv-role ul{margin:0; padding-left:18px;}
-.cv-role li{margin-bottom:5px; font-size:13.5px; color:var(--ink-2); line-height:1.55;}
-
-.writing{margin-top:52px; padding-top:30px; border-top:1px solid var(--line);}
-.writing .empty{
-  margin:0; padding:18px 16px; font-size:13.5px; color:var(--muted);
-  border:1px dashed var(--line); border-radius:var(--radius); text-align:center;
-}
-.post{padding:14px 0; border-bottom:1px solid var(--line);}
-.post h3{margin:0 0 4px; font-size:15px; font-weight:650;}
-.post p{margin:0; font-size:14px; color:var(--ink-2);}
-
-@media (max-width:860px){
-  .wrap{grid-template-columns:1fr; gap:40px; padding:36px 22px 72px;}
-  .rail{position:static; max-height:none; overflow:visible;}
-  .grid .tile{flex-basis:250px;}
-  .grid .tile.open{flex-basis:86vw;}
-}
-@media (max-width:520px){
-  .grid .tile{flex-basis:80vw;}
-  .grid .tile.open{flex-basis:88vw;}
-}
-
-@media print{
-  .wrap{display:block; max-width:none; padding:0;}
-  .rail, .stripwrap, .hint{display:none !important;}
-  .resume{margin:0; padding:0; border-top:0;}
-  .resume .work-head{font-size:20px;}
-  body{font-size:11pt; color:#000; background:#fff;}
-  a{color:#000; text-decoration:none;}
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="wrap">
@@ -254,108 +54,57 @@ a:hover{text-decoration:underline;}
   <div class="stripwrap">
   <div class="grid" id="grid" role="region" aria-label="Selected work, horizontally scrollable" tabindex="0">
 
-    <article class="tile">
-      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b1">
-        <span class="kicker">Rokt · 2024–present</span>
-        <span class="t-title">Incrementality measurement</span>
-        <span class="metric"><b>$10M</b><span>net-new advertiser spend</span></span>
-        <span class="method">Experiments that isolate product-driven conversions from baseline.</span>
-        <ul class="tags"><li>Causal inference</li><li>Experimentation</li><li>GTM enablement</li></ul>
-      </button>
-      <div class="tile-body" id="b1" hidden>
-        <p class="rolemeta">Senior Data Scientist, Product · Jul 2024 – Present</p>
-        <p class="ctx">Rokt sells conversion lift. Lift that can't be separated from conversions which would have happened anyway is a claim rather than a measurement — and an advertiser has no reason to pay for it.</p>
-        <p>I designed the incrementality experiments that isolate product-driven conversions from baseline, then equipped GTM and cross-functional stakeholders to sell the measured lift.</p>
-        <p><strong>Result:</strong> $10M in net-new advertiser spend won.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> The experiment defines the baseline the lift is measured against, so isolating product-driven conversions <em>is</em> the argument — and the number then had to survive advertisers deciding whether to commit budget against it, which is a harder test than internal review.</p>
-      </div>
-    </article>
+    <a class="tile" href="work/incrementality/">
+      <span class="kicker">Rokt · 2024–present</span>
+      <span class="t-title">Incrementality measurement</span>
+      <span class="metric"><b>$10M</b><span>net-new advertiser spend</span></span>
+      <span class="method">Experiments that isolate product-driven conversions from baseline.</span>
+      <ul class="tags"><li>Causal inference</li><li>Experimentation</li><li>GTM enablement</li></ul>
+    </a>
 
-    <article class="tile">
-      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b2">
-        <span class="kicker">Rokt</span>
-        <span class="t-title">Churn-risk auction reordering</span>
-        <span class="metric"><b>$2.5B</b><span>partner revenue loss prevented</span></span>
-        <span class="method">Logistic regression on shopper churn, reordering the auction.</span>
-        <ul class="tags"><li>Logistic regression</li><li>Production ML</li><li>Marketplace</li></ul>
-      </button>
-      <div class="tile-body" id="b2" hidden>
-        <p class="ctx">Rokt's ads sit inside its partners' checkout and confirmation flows. An advertiser that raises a shopper's churn risk can cost the partner far more than that ad placement earns.</p>
-        <p>I productionized the logistic regression model that predicts shopper churn and reorders the auction to prioritize advertisers who minimize that risk.</p>
-        <p><strong>Result:</strong> $2.5B in partner revenue loss prevented.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> Reordering trades auction yield against partner churn, so the ranking function has to price churn risk in the same units as bid value. That calibration is a business decision, not a model-fit one — the model can be well-calibrated and the ranking still wrong.</p>
-      </div>
-    </article>
+    <a class="tile" href="work/churn-auction-reordering/">
+      <span class="kicker">Rokt</span>
+      <span class="t-title">Churn-risk auction reordering</span>
+      <span class="metric"><b>$2.5B</b><span>partner revenue loss prevented</span></span>
+      <span class="method">Logistic regression on shopper churn, reordering the auction.</span>
+      <ul class="tags"><li>Logistic regression</li><li>Production ML</li><li>Marketplace</li></ul>
+    </a>
 
-    <article class="tile">
-      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b3">
-        <span class="kicker">Rokt</span>
-        <span class="t-title">Conversion elastic bidding</span>
-        <span class="metric"><b>+15%</b><span>campaign spend</span></span>
-        <span class="method">0-to-1 launch; bids adjusted dynamically for CPA efficiency.</span>
-        <ul class="tags"><li>Difference-in-differences</li><li>Causal inference</li><li>Bidding</li></ul>
-      </button>
-      <div class="tile-body" id="b3" hidden>
-        <p class="ctx">Static bids leave advertiser budget stranded on campaigns that could absorb more spend efficiently, and overspend where they can't.</p>
-        <p>I led the 0-to-1 launch of conversion elastic bidding, adjusting bids dynamically to maximize cost-per-conversion efficiency, and measured the impact with difference-in-differences.</p>
-        <p><strong>Result:</strong> +15% spend on campaigns.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> A bidding change is hard to A/B cleanly, because treated and control campaigns compete in the same auction and treatment leaks across the boundary. Difference-in-differences was the identification strategy chosen to handle that, rather than a split test that would have quietly measured the wrong thing.</p>
-      </div>
-    </article>
+    <a class="tile" href="work/elastic-bidding/">
+      <span class="kicker">Rokt</span>
+      <span class="t-title">Conversion elastic bidding</span>
+      <span class="metric"><b>+15%</b><span>campaign spend</span></span>
+      <span class="method">0-to-1 launch; bids adjusted dynamically for CPA efficiency.</span>
+      <ul class="tags"><li>Difference-in-differences</li><li>Causal inference</li><li>Bidding</li></ul>
+    </a>
 
-    <article class="tile">
-      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b4">
-        <span class="kicker">Rokt</span>
-        <span class="t-title">Campaign-diagnosis AI agent</span>
-        <span class="metric"><b>~$100M</b><span>advertiser spend unblocked</span></span>
-        <span class="method">Agent diagnosing infrastructure and delivery failures; 1.5 weeks to 24 hours.</span>
-        <ul class="tags"><li>AI agents</li><li>LLM evals</li><li>Diagnostics</li></ul>
-      </button>
-      <div class="tile-body" id="b4" hidden>
-        <p class="ctx">Campaign-delivery failures were diagnosed by hand, and advertiser spend sat blocked for as long as the tracing took.</p>
-        <p>I shipped an AI agent that diagnoses infrastructure and operational failures in campaign delivery.</p>
-        <p><strong>Result:</strong> resolution cut from 1.5 weeks to 24 hours, unblocking roughly $100M in advertiser spend.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> Resolution time is the metric that matters here, not diagnostic accuracy in isolation — a correct diagnosis that arrives in a week has already cost the spend it existed to protect.</p>
-      </div>
-    </article>
+    <a class="tile" href="work/campaign-agent/">
+      <span class="kicker">Rokt</span>
+      <span class="t-title">Campaign-diagnosis AI agent</span>
+      <span class="metric"><b>~$100M</b><span>advertiser spend unblocked</span></span>
+      <span class="method">Agent diagnosing infrastructure and delivery failures; 1.5 weeks to 24 hours.</span>
+      <ul class="tags"><li>AI agents</li><li>LLM evals</li><li>Diagnostics</li></ul>
+    </a>
 
-    <article class="tile">
-      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b5">
-        <span class="kicker">Humankind · 2022–2024</span>
-        <span class="t-title">The company's first experimentation program</span>
-        <span class="metric"><b>+230%</b><span>usage-fee revenue</span></span>
-        <span class="method">Owned the shopper funnel; built the A/B program that decided what shipped.</span>
-        <ul class="tags"><li>Experimentation</li><li>Funnel analysis</li></ul>
-      </button>
-      <div class="tile-body" id="b5" hidden>
-        <p class="rolemeta">Senior Data Analyst → Senior Data Scientist · Aug 2022 – Feb 2024</p>
-        <p class="ctx">Embedded chat connecting e-commerce shoppers with product experts. Formats, copy and placements shipped on judgment, because there was no mechanism to test them.</p>
-        <p>I owned funnel onboarding performance and built the company's A/B experimentation program, which became how the team decided what shipped.</p>
-        <p><strong>Result:</strong> shopper onboarding tripled and usage-fee revenue grew 230%.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> Before the program there was no counterfactual for a format or copy change at all. Its first job was making “it worked” a falsifiable statement; the revenue number is what survived that, not what preceded it.</p>
-      </div>
-    </article>
+    <a class="tile" href="work/experimentation-program/">
+      <span class="kicker">Humankind · 2022–2024</span>
+      <span class="t-title">The company’s first experimentation program</span>
+      <span class="metric"><b>+230%</b><span>usage-fee revenue</span></span>
+      <span class="method">Owned funnel onboarding performance; built the A/B program that decided what shipped.</span>
+      <ul class="tags"><li>Experimentation</li><li>Funnel analysis</li></ul>
+    </a>
 
-    <article class="tile">
-      <button class="tile-head" type="button" aria-expanded="false" aria-controls="b6">
-        <span class="kicker">CircleUp · 2021–2022</span>
-        <span class="t-title">NLP diligence pipeline</span>
-        <span class="metric"><b>$17M</b><span>deployed at ~3x return</span></span>
-        <span class="method">PySpark pipeline, TF-IDF over purchase-criteria language in reviews.</span>
-        <ul class="tags"><li>NLP</li><li>PySpark</li><li>TF-IDF</li></ul>
-      </button>
-      <div class="tile-body" id="b6" hidden>
-        <p class="rolemeta">Analyst, Venture Equity · Nov 2021 – Aug 2022</p>
-        <p class="ctx">A consumer-brand fund screening far more candidates than a team could diligence by hand, with the signal buried in unstructured customer language.</p>
-        <p>I built the PySpark NLP pipeline that TF-IDF vectorized purchase-criteria language from product reviews, narrowing 30 candidates to 6 investments.</p>
-        <p><strong>Result:</strong> $17M deployed at roughly 3x return.</p>
-        <p class="knew"><strong>How I knew it was real:</strong> The ~3x is realized, not modeled. The pipeline's job ended at narrowing the funnel — the return is what those 6 investments actually did afterward, which is the only version of this number that means anything.</p>
-      </div>
-    </article>
+    <a class="tile" href="work/nlp-diligence/">
+      <span class="kicker">CircleUp · 2021–2022</span>
+      <span class="t-title">NLP diligence pipeline</span>
+      <span class="metric"><b>$17M</b><span>deployed at ~3x return</span></span>
+      <span class="method">PySpark pipeline, TF-IDF over purchase-criteria language in reviews.</span>
+      <ul class="tags"><li>NLP</li><li>PySpark</li><li>TF-IDF</li></ul>
+    </a>
 
   </div>
   </div>
-  <p class="hint">Scroll sideways for more · select any tile to read the full case · <kbd>Esc</kbd> closes.</p>
+  <p class="hint">Scroll sideways for more · select any tile to open the case.</p>
 
   <section class="resume" id="cv">
     <h2 class="work-head">CV</h2>
@@ -420,34 +169,5 @@ a:hover{text-decoration:underline;}
 </main>
 
 </div>
-
-<script>
-(function(){
-  var grid = document.getElementById('grid');
-  function shut(btn){
-    btn.setAttribute('aria-expanded','false');
-    document.getElementById(btn.getAttribute('aria-controls')).hidden = true;
-    btn.closest('.tile').classList.remove('open');
-  }
-  function closeAll(){
-    grid.querySelectorAll('.tile-head[aria-expanded="true"]').forEach(shut);
-  }
-  grid.addEventListener('click', function(e){
-    var btn = e.target.closest('.tile-head');
-    if(!btn) return;
-    var isOpen = btn.getAttribute('aria-expanded') === 'true';
-    closeAll();
-    if(isOpen) return;
-    btn.setAttribute('aria-expanded','true');
-    document.getElementById(btn.getAttribute('aria-controls')).hidden = false;
-    var tile = btn.closest('.tile');
-    tile.classList.add('open');
-    tile.scrollIntoView({inline:'start', block:'nearest', behavior:'smooth'});
-  });
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape') closeAll();
-  });
-})();
-</script>
 </body>
 </html>
