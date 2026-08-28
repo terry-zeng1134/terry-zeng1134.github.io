@@ -206,10 +206,16 @@ h1.case-title{font-size:29px; font-weight:700; letter-spacing:-.02em; margin:0 0
 .case-metric span{display:block; font-size:13.5px; color:var(--muted); margin-top:5px;}
 .casebody p{margin:0 0 15px; font-size:15.5px; line-height:1.62; color:var(--ink-2);}
 .casebody p.ctx{color:var(--muted);}
-.casefig{float:right; clear:both; width:12px; margin:5px 0 6px 10px;}
-.casefig img{
-  display:block; width:100%; height:auto; border-radius:2px;
-  border:1px solid var(--line); background:#fff;
+.casefig{float:right; clear:both; width:152px; margin:4px 0 14px 24px;}
+/* Crop to the phone: the source is a small device on a large black field, so
+   the figure box is a window onto x 262-762, y 118-1024 of the 1024-square. */
+.casefig .shot{
+  display:block; position:relative; overflow:hidden; aspect-ratio:500/906;
+  border-radius:5px; border:1px solid var(--line); background:#000;
+}
+.casefig .shot img{
+  position:absolute; display:block; border:0;
+  width:204.8%; height:auto; left:-52.4%; top:-13%;
 }
 .casefig figcaption{
   margin-top:8px; font-size:12px; line-height:1.5; color:var(--muted);
