@@ -52,16 +52,15 @@
       <tr><th scope="row">Guardrail</th><td class="val">Merchant checkout conversion rate</td><td class="why">The merchant can end the placement. Lift bought at the cost of completed checkouts is not a win.</td></tr>
       <tr><th scope="row">Measurement window</th><td class="val"><span class="todo">fill in</span></td><td class="why">Long enough to contain the decision, short enough not to absorb usage the ad had nothing to do with. Extending it inflates the baseline faster than the lift.</td></tr>
       <tr><th scope="row">Estimator</th><td class="val"><span class="todo">fill in</span></td><td class="why">Random assignment makes the point estimate the easy part. The choice here is about variance reduction and how the interval is computed.</td></tr>
-      <tr><th scope="row">Variance estimation</th><td class="val">Delta method on the ratio metric</td><td class="why">Randomization and analysis do not happen at the same unit, so outcomes within a randomization unit are correlated. Usage rate is a ratio of means, not a mean, and a naive binomial standard error understates its variance — which manufactures significance exactly where the baseline is highest.</td></tr>
-      <tr><th scope="row">MDE and power</th><td class="val"><span class="todo">fill in</span></td><td class="why">Agreed with the advertiser before the test, so the readout is contractible rather than negotiable afterwards.</td></tr>
-      <tr><th scope="row">Duration / volume</th><td class="val"><span class="todo">fill in</span></td><td class="why">Follows from the MDE and the base rate. Below the volume it implies, there is no number worth selling.</td></tr>
+      <tr><th scope="row">Variance estimation</th><td class="val">Delta method on the ratio metric</td><td class="why">Randomization and analysis do not happen at the same unit, and the metric allows repeat purchases: a shopper can pay more than once inside the window, so outcomes within a randomization unit are correlated. Usage rate is a ratio of means — uses over purchase occasions — not a mean, and a naive binomial standard error understates its variance, which manufactures significance exactly where the baseline is highest.</td></tr>
+      <tr><th scope="row">Duration / volume</th><td class="val">6 weeks</td><td class="why">Follows from the MDE and the base rate. Below the volume it implies, there is no number worth selling.</td></tr>
       </tbody>
     </table>
     </div>
 
     <h2>Results</h2>
-    <p>Secured $10M in net-new advertiser spend.</p>
-    <p><span class="todo">fill in</span> — measured lift, with its confidence interval, and the split between new-to-method and existing users. Redacted axes are the norm here; the shape of the result is publishable where the level is not.</p>
+    <p>Against the holdout, the offer produced a 10% lift in incremental users acquired and a 15% lift in incremental usage. Usage ran ahead of users, which is the half that pays: the shoppers the ad converted did not stop at one transaction, so the campaign bought repeat payers rather than single payments. Levels are redacted here; the shape of the result is publishable where the level is not.</p>
+    <p>GTM took that lift to the advertiser and secured $10M in additional budget.</p>
 
     <h2>Discussion</h2>
     <ul class="points">
@@ -71,8 +70,6 @@
       <li><strong>The same rule should govern targeting, not just measurement.</strong> If the offer cannot move habitual users, serving it to them is paid reach with no incremental return. The eligibility rule that makes the experiment credible is the rule that makes the campaign profitable.</li>
       <li><strong>The merchant is the third side.</strong> An ad on the payment page that costs the merchant checkout conversions ends the vertical, whatever it does for the advertiser — so the checkout funnel is a guardrail on every readout, not a separate question. <a href="../payment-page-ads/">Related work &rarr;</a></li>
     </ul>
-
-    <p class="knew"><strong>How I knew it was real:</strong> Randomization defines the baseline, so the identification argument is the design itself rather than a modeling assumption — there is no covariate set to be talked out of. The commercial test is the harder one. These buyers could compute their own return, and the incremental figure is the input that decides whether the placement makes money or loses it. They committed budget against it.</p>
 
     <p class="refs"><strong>Further reading.</strong> Blake, Nosko &amp; Tadelis (2015), <em>Consumer Heterogeneity and Paid Search Effectiveness</em>, Econometrica — attributed conversions vastly overstating incremental value. &middot; Lewis &amp; Rao (2015), <em>The Unfavorable Economics of Measuring the Returns to Advertising</em>, QJE — why advertising lift is so hard to detect. &middot; Gordon, Zettelmeyer, Bhargava &amp; Chapsky (2019), <em>A Comparison of Approaches to Advertising Measurement</em>, Marketing Science — why observational corrections do not recover the experimental benchmark. &middot; Deng, Knoblich &amp; Lu (2018), <em>Applying the Delta Method in Metric Analytics</em>, KDD — variance of ratio metrics when the randomization unit is not the analysis unit.</p>
 
