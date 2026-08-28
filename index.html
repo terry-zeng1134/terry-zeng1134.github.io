@@ -78,7 +78,7 @@ a:hover{text-decoration:underline;}
 .orgkey dd{margin:0; font-size:12.5px; color:var(--muted); line-height:1.4;}
 .orgkey dd span{opacity:.75; font-style:italic;}
 
-.stripwrap{position:relative;}
+.stripwrap{position:relative; margin-top:4px;}
 .stripwrap::after{
   content:""; position:absolute; top:0; right:0; bottom:14px; width:56px;
   pointer-events:none; background:linear-gradient(to right, transparent, var(--bg));
@@ -170,7 +170,7 @@ a:hover{text-decoration:underline;}
   font-size:12.5px; color:var(--muted);
 }
 
-.resume{margin-top:52px; padding-top:30px; border-top:1px solid var(--line);}
+.resume{margin-top:44px; padding-top:30px; border-top:1px solid var(--line);}
 .cv{margin-top:20px;}
 .cv-role{margin-bottom:22px;}
 .cv-role h3{margin:0 0 2px; font-size:15px; font-weight:650; color:var(--ink);}
@@ -202,8 +202,7 @@ a:hover{text-decoration:underline;}
 
 @media print{
   .wrap{display:block; max-width:none; padding:0;}
-  .rail, .stripwrap, .hint, .orgkey, .also, .writing,
-  main > .work-head, main > .work-sub{display:none !important;}
+  .rail, .stripwrap, .hint{display:none !important;}
   .resume{margin:0; padding:0; border-top:0;}
   .resume .work-head{font-size:20px;}
   body{font-size:11pt; color:#000; background:#fff;}
@@ -252,16 +251,6 @@ a:hover{text-decoration:underline;}
 </header>
 
 <main>
-  <h2 class="work-head">Selected work in experimentation, causal inference and marketplace ML</h2>
-  <p class="work-sub">Six cases in depth, across a three-sided ads marketplace, an e-commerce chat product and a consumer-brand fund.</p>
-
-  <dl class="orgkey">
-    <div><dt>Rokt</dt><dd>Marketplace for e-commerce confirmation-page and in-transaction ads</dd></div>
-    <div><dt>Humankind</dt><dd>Embedded chat connecting e-commerce shoppers with product experts <span>· acquired</span></dd></div>
-    <div><dt>CircleUp</dt><dd>Consumer-brand VC fund built on an in-house data platform <span>· acquired</span></dd></div>
-    <div><dt>Partners in Performance, Part of Accenture</dt><dd>Operational-improvement consultancy</dd></div>
-  </dl>
-
   <div class="stripwrap">
   <div class="grid" id="grid" role="region" aria-label="Selected work, horizontally scrollable" tabindex="0">
 
@@ -368,20 +357,6 @@ a:hover{text-decoration:underline;}
   </div>
   <p class="hint">Scroll sideways for more · select any tile to read the full case · <kbd>Esc</kbd> closes.</p>
 
-  <section class="also">
-    <h2 class="work-head">Also shipped</h2>
-    <dl class="alsolist">
-      <div><dt>Upsells A/B program <span>· Rokt</span></dt><dd>Lifted revenue per transaction <b>+20%</b> above baseline, testing formats and offers across ~2 million transactions a day.</dd></div>
-      <div><dt>Payment-page ads <span>· Rokt</span></dt><dd>Tripled revenue to <b>$75M</b> by productizing do-no-harm holdout experiments that proved no impact on checkout-funnel conversion, cutting partner onboarding time by two-thirds.</dd></div>
-      <div><dt>Mentorship program <span>· Rokt</span></dt><dd><b>7 of 10</b> mentees promoted within a year — new-grad data scientists and analysts, on a program pairing technical coaching with senior-stakeholder exposure.</dd></div>
-      <div><dt>Conversion drivers <span>· Humankind</span></dt><dd>Lifted purchase conversion <b>26%</b> with the logistic regression model that identified recommendations, expert response time and retargeting as drivers, then reprioritized the roadmap.</dd></div>
-      <div><dt>Client health scoring <span>· Humankind</span></dt><dd>Retained <b>10% of total ARR</b> with a churn-risk scoring model that directed product and CS prioritization.</dd></div>
-      <div><dt>Value-indicator models <span>· CircleUp</span></dt><dd>Opened a <b>$500M</b> investable universe with Python/SQL/BigQuery models that identified and validated new value indicators for startups.</dd></div>
-      <div><dt>Unmeasured mine operation <span>· Partners in Performance</span></dt><dd>Eliminated roughly <b>$33M</b> in annual production loss at a $350M/year gold mine with a Python/SQL pipeline that quantified it and ranked its loss drivers.</dd></div>
-      <div><dt>Sales KPI framework <span>· Partners in Performance</span></dt><dd>Added <b>$25M</b> in annualized revenue across 10 declining teams by defining their north-star and KPI framework in SQL/Tableau, then driving the plays to adoption.</dd></div>
-    </dl>
-  </section>
-
   <section class="resume" id="resume">
     <h2 class="work-head">Résumé</h2>
     <p class="work-sub">New York, NY · <a href="mailto:terry.zeng17@gmail.com">terry.zeng17@gmail.com</a> · <a href="https://www.linkedin.com/in/terry-zeng">linkedin.com/in/terry-zeng</a></p>
@@ -441,18 +416,6 @@ a:hover{text-decoration:underline;}
         <p class="cv-plain"><strong>Interests:</strong> Music production (400k+ streams), reading, skiing, tennis, restaurants</p>
       </div>
     </div>
-  </section>
-
-  <section class="writing">
-    <h2 class="work-head">Writing</h2>
-    <p class="work-sub">Notes on experimentation, causal measurement and marketplace modeling.</p>
-    <!-- Add a post by copying this block:
-    <article class="post">
-      <h3><a href="POST_URL">Post title</a></h3>
-      <p>One-sentence description of what the post argues.</p>
-    </article>
-    -->
-    <p class="empty">Nothing published yet.</p>
   </section>
 </main>
 
