@@ -95,6 +95,21 @@ a:hover{text-decoration:underline;}
 .tile:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 .tile:hover{border-color:var(--line-strong);}
 
+/* Tile thumbnails — CURRENTLY UNUSED, no tile carries an image.
+   Kept because the offsets are awkward to re-derive: a fixed 16:10 window
+   onto a square source, cropped by absolute offset to the ad unit.
+   To use, put <span class="thumbwrap"><img ...></span> first inside a .tile. */
+.thumbwrap{
+  display:block; position:relative; overflow:hidden;
+  width:calc(100% + 30px); margin:-14px -15px 12px;
+  aspect-ratio:16/10; background:#000;
+  border-bottom:1px solid var(--line);
+}
+.thumbwrap img{
+  position:absolute; display:block; border:0;
+  width:204.8%; height:auto; left:-52.4%; top:-99.2%;
+}
+
 .kicker{
   display:block; font-size:11.5px; font-weight:600; letter-spacing:.05em;
   text-transform:uppercase; color:var(--muted); margin-bottom:6px;
@@ -191,6 +206,56 @@ h1.case-title{font-size:29px; font-weight:700; letter-spacing:-.02em; margin:0 0
 .case-metric span{display:block; font-size:13.5px; color:var(--muted); margin-top:5px;}
 .casebody p{margin:0 0 15px; font-size:15.5px; line-height:1.62; color:var(--ink-2);}
 .casebody p.ctx{color:var(--muted);}
+.casefig{float:right; clear:both; width:12px; margin:5px 0 6px 10px;}
+.casefig img{
+  display:block; width:100%; height:auto; border-radius:2px;
+  border:1px solid var(--line); background:#fff;
+}
+.casefig figcaption{
+  margin-top:8px; font-size:12px; line-height:1.5; color:var(--muted);
+}
+.casebody h2{
+  clear:both;
+  font-size:12px; font-weight:650; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--muted); margin:30px 0 10px;
+}
+.casebody ul.points{
+  margin:0 0 15px; padding-left:19px;
+  font-size:15.5px; line-height:1.62; color:var(--ink-2);
+}
+.casebody ul.points li{margin-bottom:9px;}
+.casebody ul.points li strong{color:var(--ink); font-weight:650;}
+.paramwrap{overflow-x:auto; margin:0 0 18px;}
+table.params{
+  border-collapse:collapse; width:100%; min-width:600px;
+  font-size:14px; line-height:1.5;
+}
+table.params thead th{
+  font-size:11px; font-weight:650; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--muted); text-align:left; vertical-align:bottom;
+  padding:0 16px 8px 0; border-bottom:1px solid var(--line-strong);
+}
+table.params tbody th{
+  width:21%; font-weight:600; color:var(--ink); font-size:13.5px;
+}
+table.params tbody th, table.params td{
+  text-align:left; vertical-align:top;
+  padding:10px 16px 10px 0; border-bottom:1px solid var(--line);
+}
+table.params td.val{width:27%; color:var(--ink-2);}
+table.params td.why{color:var(--muted);}
+table.params thead th:last-child,
+table.params tbody th:last-child, table.params td:last-child{padding-right:0;}
+table.params tbody tr:last-child th, table.params tbody tr:last-child td{border-bottom:0;}
+
+.todo{
+  color:#b4560a; font-weight:600; font-size:13px;
+  border:1px dashed currentColor; border-radius:3px; padding:0 5px;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .todo{color:#f0a15a;} }
+.casebody .refs{
+  margin-top:26px; font-size:13px; line-height:1.65; color:var(--muted);
+}
 .casebody .knew{
   margin-top:24px; padding-top:18px; border-top:1px solid var(--line); font-size:15px;
 }
@@ -203,4 +268,4 @@ h1.case-title{font-size:29px; font-weight:700; letter-spacing:-.02em; margin:0 0
   border-radius:3px; padding:2px 8px; background:var(--surface);
 }
 .casefoot{margin-top:40px; padding-top:22px; border-top:1px solid var(--line); font-size:13.5px;}
-@media (max-width:600px){ .casewrap{padding:30px 20px 70px;} h1.case-title{font-size:24px;} .case-metric b{font-size:33px;} }
+@media (max-width:600px){ .casefig{float:none; width:100%; max-width:300px; margin:18px 0 22px;} .casewrap{padding:30px 20px 70px;} h1.case-title{font-size:24px;} .case-metric b{font-size:33px;} }

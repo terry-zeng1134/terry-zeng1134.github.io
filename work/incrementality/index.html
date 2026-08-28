@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Incrementality measurement — Terry Zeng</title>
-<meta name="description" content="Incrementality measurement — $10M net-new advertiser spend. Rokt · Senior Data Scientist, Product · Jul 2024 – Present">
+<title>Incrementality: Would they have used it anyway? — Terry Zeng</title>
+<meta name="description" content="Incrementality: Would they have used it anyway? — $10M net-new advertiser spend. Rokt · Senior Data Scientist, Product · Jul 2024 – Present">
 <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
@@ -13,15 +13,69 @@
 
   <header class="casehead">
     <span class="case-kicker">Rokt · Senior Data Scientist, Product · Jul 2024 – Present</span>
-    <h1 class="case-title">Incrementality measurement</h1>
+    <h1 class="case-title">Incrementality: Would they have used it anyway?</h1>
     <p class="case-metric"><b>$10M</b><span>net-new advertiser spend</span></p>
   </header>
 
   <div class="casebody">
-    <p class="ctx">Rokt sells conversion lift. Lift that can’t be separated from conversions which would have happened anyway is a claim rather than a measurement — and an advertiser has no reason to pay for it.</p>
-    <p>I designed the incrementality experiments that isolate product-driven conversions from baseline, then equipped GTM and cross-functional stakeholders to sell the measured lift.</p>
-    <p><strong>Result:</strong> $10M in net-new advertiser spend won.</p>
-    <p class="knew"><strong>How I knew it was real:</strong> The experiment defines the baseline the lift is measured against, so isolating product-driven conversions <em>is</em> the argument — and the number then had to survive advertisers deciding whether to commit budget against it, which is a harder test than internal review.</p>
+
+    <h2>The problem</h2>
+    <p>Rokt Pay&#43; opened a new placement: advertising on the merchant’s payment page. The advertisers it attracted were payment providers — Apple Pay chief among them. Their economics are unusually clean. They earn a fee whenever a shopper pays with their method, so an impression pays for itself the moment it costs less than the fee it generates.</p>
+
+    <figure class="casefig">
+      <img src="../../img/pay-plus-mockup.png" alt="A merchant payment page on a phone: an Apple Pay offer, served by Rokt, sits above the list of payment methods.">
+    </figure>
+
+    <p>That makes a single quantity decisive. The return on a campaign is <em>(incremental uses &times; fee per use) &minus; (impressions &times; price)</em>, and everything turns on the word <em>incremental</em> — uses the ad caused, not uses that merely followed it. Apple Pay is already one of the most common ways to pay, so a large share of the shoppers who see the offer and then tap it were always going to tap it. We needed an experiment that could show people were using the payment method <em>because</em> we showed the ad.</p>
+
+    <h2>Why the standard measurement fails</h2>
+    <p>The industry-standard number is the attributed conversion — the shopper saw the offer, then paid with Apple Pay. On this placement it is close to uninformative. Everyone on a payment page is about to pay by <em>something</em>, and the baseline usage rate for a leading method is already high. Most attributed conversions are shoppers who would have tapped it anyway.</p>
+    <p>That gives attribution a perverse property here: it rewards popularity rather than persuasion. A method with a large baseline share posts a large attributed rate and a challenger posts a small one, before either ad has changed a single decision. Ranked on attribution, the placement is measuring market share.</p>
+    <p>The obvious repair — compare shoppers who saw the offer with those who did not — fails for a reason specific to a marketplace. Exposure is not random. An auction decides who sees which offer, and it ranks on predicted conversion, so the unexposed group is the group the model judged least likely to convert. There is no observational correction, because the selection mechanism was engineered to be good at selection.</p>
+
+    <h2>What I did</h2>
+    <p>A randomized holdout: a share of eligible impressions where the offer is not served, with payment-method usage compared across arms. Randomization removes the selection problem by construction — the withheld group is not the group the model liked least, it is a random sample of the same population.</p>
+    <p>I defined the design — eligibility rule, randomization unit, window, estimator and guardrails — and specified it for engineering, who built the serving and the reporting. I owned the readouts and what they were permitted to claim.</p>
+    <p>The high baseline is the worst case for statistical power: the lift is small against a base rate that is already large, and that baseline dominates the variance. Rather than model around it, we took it out of the population. Eligibility was restricted to shoppers with no Apple Pay use in the trailing twelve months, which leaves a group whose base rate is near zero — a use in the treatment arm is then far more plausibly something the ad caused. The minimum detectable effect was still agreed <em>before</em> the test rather than discovered after it.</p>
+
+    <h2>Experiment parameters</h2>
+    <div class="paramwrap">
+    <table class="params">
+      <thead>
+        <tr><th scope="col">Parameter</th><th scope="col">Setting</th><th scope="col">Why it was set this way</th></tr>
+      </thead>
+      <tbody>
+      <tr><th scope="row">Eligible population</th><td class="val">Shoppers with no Apple Pay use in the trailing 12 months</td><td class="why">The baseline is the whole problem, so it was removed rather than modeled around. Excluding habitual users leaves a population whose base rate is near zero, where a use in the treatment arm is far more plausibly something the ad caused.</td></tr>
+      <tr><th scope="row">Unit of randomization</th><td class="val"><span class="todo">fill in</span></td><td class="why">Decides what can leak between arms. Randomizing per impression lets one shopper land in both; per user costs power but keeps the comparison clean.</td></tr>
+      <tr><th scope="row">Arms</th><td class="val">Offer served in the Pay&#43; placement vs. offer withheld — <span class="todo">fill in</span> whether the slot ran empty or was backfilled</td><td class="why">The intervention is the offer being present at all, not which creative ran. What fills the control slot sets what the lift is measured <em>against</em>: empty measures the offer versus nothing, backfilled measures it versus the next-best advertiser.</td></tr>
+      <tr><th scope="row">Experiment metric</th><td class="val">Incremental uses, incremental users</td><td class="why">The advertiser is paid per use, so uses are what their return is computed on. Users say how much of that is a shopper who adopted the method rather than a single transaction — the difference between buying a payment and buying a payer. Clicks and impressions are neither.</td></tr>
+      <tr><th scope="row">Guardrail</th><td class="val">Merchant checkout conversion rate</td><td class="why">The merchant can end the placement. Lift bought at the cost of completed checkouts is not a win.</td></tr>
+      <tr><th scope="row">Measurement window</th><td class="val"><span class="todo">fill in</span></td><td class="why">Long enough to contain the decision, short enough not to absorb usage the ad had nothing to do with. Extending it inflates the baseline faster than the lift.</td></tr>
+      <tr><th scope="row">Estimator</th><td class="val"><span class="todo">fill in</span></td><td class="why">Random assignment makes the point estimate the easy part. The choice here is about variance reduction and how the interval is computed.</td></tr>
+      <tr><th scope="row">Variance estimation</th><td class="val">Delta method on the ratio metric</td><td class="why">Randomization and analysis do not happen at the same unit, so outcomes within a randomization unit are correlated. Usage rate is a ratio of means, not a mean, and a naive binomial standard error understates its variance — which manufactures significance exactly where the baseline is highest.</td></tr>
+      <tr><th scope="row">MDE and power</th><td class="val"><span class="todo">fill in</span></td><td class="why">Agreed with the advertiser before the test, so the readout is contractible rather than negotiable afterwards.</td></tr>
+      <tr><th scope="row">Duration / volume</th><td class="val"><span class="todo">fill in</span></td><td class="why">Follows from the MDE and the base rate. Below the volume it implies, there is no number worth selling.</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h2>Results</h2>
+    <p>Secured $10M in net-new advertiser spend.</p>
+    <p><span class="todo">fill in</span> — measured lift, with its confidence interval, and the split between new-to-method and existing users. Redacted axes are the norm here; the shape of the result is publishable where the level is not.</p>
+
+    <h2>Discussion</h2>
+    <ul class="points">
+      <li><strong>Withholding impressions costs money.</strong> Every impression held back is revenue that neither Rokt nor the merchant earns, so the size of the control arm is a commercial decision about what certainty is worth — not a purely statistical one.</li>
+      <li><strong>Some campaigns cannot be measured.</strong> Below a certain volume the minimum detectable effect exceeds any lift worth buying, and no honest number can be promised. Saying so is part of the product; a measurement business that returns a number every time is not measuring.</li>
+      <li><strong>The filter is the design decision.</strong> Restricting eligibility buys identification and pays for it in external validity. The result is a lift among reachable non-users, not a blanket lift across every impression, and quoting it as the latter would overstate it. Usage lift among habitual users stays unmeasured — at that base rate it is not cheaply measurable.</li>
+      <li><strong>The same rule should govern targeting, not just measurement.</strong> If the offer cannot move habitual users, serving it to them is paid reach with no incremental return. The eligibility rule that makes the experiment credible is the rule that makes the campaign profitable.</li>
+      <li><strong>The merchant is the third side.</strong> An ad on the payment page that costs the merchant checkout conversions ends the vertical, whatever it does for the advertiser — so the checkout funnel is a guardrail on every readout, not a separate question. <a href="../payment-page-ads/">Related work &rarr;</a></li>
+    </ul>
+
+    <p class="knew"><strong>How I knew it was real:</strong> Randomization defines the baseline, so the identification argument is the design itself rather than a modeling assumption — there is no covariate set to be talked out of. The commercial test is the harder one. These buyers could compute their own return, and the incremental figure is the input that decides whether the placement makes money or loses it. They committed budget against it.</p>
+
+    <p class="refs"><strong>Further reading.</strong> Blake, Nosko &amp; Tadelis (2015), <em>Consumer Heterogeneity and Paid Search Effectiveness</em>, Econometrica — attributed conversions vastly overstating incremental value. &middot; Lewis &amp; Rao (2015), <em>The Unfavorable Economics of Measuring the Returns to Advertising</em>, QJE — why advertising lift is so hard to detect. &middot; Gordon, Zettelmeyer, Bhargava &amp; Chapsky (2019), <em>A Comparison of Approaches to Advertising Measurement</em>, Marketing Science — why observational corrections do not recover the experimental benchmark. &middot; Deng, Knoblich &amp; Lu (2018), <em>Applying the Delta Method in Metric Analytics</em>, KDD — variance of ratio metrics when the randomization unit is not the analysis unit.</p>
+
     <ul class="case-tags"><li>Causal inference</li><li>Experimentation</li><li>GTM enablement</li></ul>
   </div>
 
