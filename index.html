@@ -78,10 +78,22 @@ a:hover{text-decoration:underline;}
 .orgkey dd{margin:0; font-size:12.5px; color:var(--muted); line-height:1.4;}
 .orgkey dd span{opacity:.75; font-style:italic;}
 
-.grid{
-  display:grid; gap:12px;
-  grid-template-columns:repeat(auto-fill, minmax(228px, 1fr));
+.stripwrap{position:relative;}
+.stripwrap::after{
+  content:""; position:absolute; top:0; right:0; bottom:14px; width:56px;
+  pointer-events:none; background:linear-gradient(to right, transparent, var(--bg));
 }
+.grid{
+  display:flex; gap:12px; overflow-x:auto; padding-bottom:14px;
+  scroll-snap-type:x proximity; overscroll-behavior-x:contain;
+  scrollbar-width:thin; scrollbar-color:var(--line-strong) transparent;
+}
+.grid::-webkit-scrollbar{height:8px;}
+.grid::-webkit-scrollbar-thumb{background:var(--line-strong); border-radius:4px;}
+.grid::-webkit-scrollbar-track{background:transparent;}
+.grid .tile{flex:0 0 286px; scroll-snap-align:start;}
+.grid .tile.open{flex-basis:min(700px, 74vw);}
+.grid:focus-visible{outline:2px solid var(--accent); outline-offset:4px;}
 .tile{
   border:1px solid var(--line); border-radius:var(--radius);
   background:var(--surface); overflow:hidden;
@@ -89,7 +101,7 @@ a:hover{text-decoration:underline;}
   display:flex; flex-direction:column;
 }
 .tile:hover{border-color:var(--line-strong);}
-.tile.open{grid-column:1/-1; border-color:var(--line-strong); background:var(--bg);}
+.tile.open{border-color:var(--line-strong); background:var(--bg);}
 
 .tile-head{
   display:flex; flex-direction:column; flex:1 1 auto;
@@ -158,6 +170,16 @@ a:hover{text-decoration:underline;}
   font-size:12.5px; color:var(--muted);
 }
 
+.resume{margin-top:52px; padding-top:30px; border-top:1px solid var(--line);}
+.cv{margin-top:20px;}
+.cv-role{margin-bottom:22px;}
+.cv-role h3{margin:0 0 2px; font-size:15px; font-weight:650; color:var(--ink);}
+.cv-role h3 span{font-weight:400; font-style:italic; color:var(--muted); font-size:13.5px;}
+.cv-meta{margin:0 0 7px; font-size:13px; color:var(--ink-2); font-weight:550;}
+.cv-plain{margin:0 0 4px; font-size:13.5px; color:var(--ink-2); line-height:1.5;}
+.cv-role ul{margin:0; padding-left:18px;}
+.cv-role li{margin-bottom:5px; font-size:13.5px; color:var(--ink-2); line-height:1.55;}
+
 .writing{margin-top:52px; padding-top:30px; border-top:1px solid var(--line);}
 .writing .empty{
   margin:0; padding:18px 16px; font-size:13.5px; color:var(--muted);
@@ -170,10 +192,22 @@ a:hover{text-decoration:underline;}
 @media (max-width:860px){
   .wrap{grid-template-columns:1fr; gap:40px; padding:36px 22px 72px;}
   .rail{position:static; max-height:none; overflow:visible;}
-  .grid{grid-template-columns:repeat(auto-fill, minmax(190px,1fr));}
+  .grid .tile{flex-basis:250px;}
+  .grid .tile.open{flex-basis:86vw;}
 }
 @media (max-width:520px){
-  .grid{grid-template-columns:1fr;}
+  .grid .tile{flex-basis:80vw;}
+  .grid .tile.open{flex-basis:88vw;}
+}
+
+@media print{
+  .wrap{display:block; max-width:none; padding:0;}
+  .rail, .stripwrap, .hint, .orgkey, .also, .writing,
+  main > .work-head, main > .work-sub{display:none !important;}
+  .resume{margin:0; padding:0; border-top:0;}
+  .resume .work-head{font-size:20px;}
+  body{font-size:11pt; color:#000; background:#fff;}
+  a{color:#000; text-decoration:none;}
 }
 </style>
 </head>
@@ -211,7 +245,7 @@ a:hover{text-decoration:underline;}
     <li><a href="mailto:terry.zeng17@gmail.com">terry.zeng17@gmail.com</a></li>
     <li><a href="https://www.linkedin.com/in/terry-zeng">LinkedIn</a></li>
     <li><a href="https://github.com/terry-zeng1134">GitHub</a></li>
-    <li><a href="resume.html">Résumé</a></li>
+    <li><a href="#resume">Résumé</a></li>
   </ul>
 
   <p class="interests">Music production (400k+ streams) · skiing · tennis</p>
@@ -228,7 +262,8 @@ a:hover{text-decoration:underline;}
     <div><dt>Partners in Performance, Part of Accenture</dt><dd>Operational-improvement consultancy</dd></div>
   </dl>
 
-  <div class="grid" id="grid">
+  <div class="stripwrap">
+  <div class="grid" id="grid" role="region" aria-label="Selected work, horizontally scrollable" tabindex="0">
 
     <article class="tile">
       <button class="tile-head" type="button" aria-expanded="false" aria-controls="b1">
@@ -330,7 +365,8 @@ a:hover{text-decoration:underline;}
     </article>
 
   </div>
-  <p class="hint">Select any tile to read the full case. Press <kbd>Esc</kbd> to close.</p>
+  </div>
+  <p class="hint">Scroll sideways for more · select any tile to read the full case · <kbd>Esc</kbd> closes.</p>
 
   <section class="also">
     <h2 class="work-head">Also shipped</h2>
@@ -344,6 +380,67 @@ a:hover{text-decoration:underline;}
       <div><dt>Unmeasured mine operation <span>· Partners in Performance</span></dt><dd>Eliminated roughly <b>$33M</b> in annual production loss at a $350M/year gold mine with a Python/SQL pipeline that quantified it and ranked its loss drivers.</dd></div>
       <div><dt>Sales KPI framework <span>· Partners in Performance</span></dt><dd>Added <b>$25M</b> in annualized revenue across 10 declining teams by defining their north-star and KPI framework in SQL/Tableau, then driving the plays to adoption.</dd></div>
     </dl>
+  </section>
+
+  <section class="resume" id="resume">
+    <h2 class="work-head">Résumé</h2>
+    <p class="work-sub">New York, NY · <a href="mailto:terry.zeng17@gmail.com">terry.zeng17@gmail.com</a> · <a href="https://www.linkedin.com/in/terry-zeng">linkedin.com/in/terry-zeng</a></p>
+
+    <div class="cv">
+      <div class="cv-role">
+        <h3>Rokt <span>— Marketplace for e-commerce confirmation page and in-transaction ads</span></h3>
+        <p class="cv-meta">Senior Data Scientist, Product · Jul 2024 – Present · New York, NY</p>
+        <ul>
+          <li>Lifted revenue per transaction +20% above baseline for Rokt Upsells by designing the A/B experimentation program that accelerated hypothesis testing for formats and offers for ~2 million transactions per day</li>
+          <li>Tripled revenue to $75M for Rokt payment page ads by productizing do-no-harm holdout experiments that drove partner confidence by proving no impact on checkout funnel conversion, cutting onboarding time by two-thirds</li>
+          <li>Led the 0 to 1 launch of conversion elastic bidding, increasing spend +15% on campaigns by dynamically adjusting bids to maximize cost-per-conversion/CPA efficiency, measuring impact using difference-in-differences causal inference</li>
+          <li>Won $10M in net-new advertiser spend by designing the incrementality experiments that isolated product-driven conversions from baseline, then equipping GTM and cross-functional stakeholders to sell the measured lift</li>
+          <li>Prevented $2.5bn in partner revenue loss by productionalizing a logistic regression model that predicts shopper churn and reorders the auction to prioritize advertisers that minimize churn risk</li>
+          <li>Drove a 7 of 10 one-year promotion among the new-grad data scientists and analysts I mentored, by building the mentorship program that paired technical coaching with exposure to senior stakeholders</li>
+          <li>Unblocked ~$100M in advertiser spend by shipping an AI agent that diagnosed infrastructure and operational failures in campaign delivery, cutting resolution from 1.5 weeks to 24 hours</li>
+        </ul>
+      </div>
+
+      <div class="cv-role">
+        <h3>Humankind Technologies <span>(acquired) — Embedded chat connecting e-commerce shoppers with product experts</span></h3>
+        <p class="cv-meta">Senior Data Analyst → Senior Data Scientist · Aug 2022 – Feb 2024 · Remote, US</p>
+        <ul>
+          <li>3x&#8217;d shopper onboarding and grew usage-fee revenue 230% by owning funnel onboarding performance and building the company&#8217;s A/B experimentation program to decide which formats, copy, and placements shipped</li>
+          <li>Lifted purchase conversion 26% by developing the logistic regression model that identified personalized recommendations, expert response time, and retargeting as drivers, then reprioritizing the roadmap</li>
+          <li>Retained 10% of business&#8217;s total ARR by building a client health scoring model that identified accounts at risk of churn and directed product and CS prioritization</li>
+        </ul>
+      </div>
+
+      <div class="cv-role">
+        <h3>CircleUp <span>(acquired) — Consumer-brand VC fund built on an in-house data platform</span></h3>
+        <p class="cv-meta">Analyst, Venture Equity · Nov 2021 – Aug 2022 · Remote, US</p>
+        <ul>
+          <li>Deployed $17M at roughly 3x return by building a PySpark NLP pipeline that TF-IDF vectorized purchase-criteria language from reviews, narrowing 30 candidates to 6 investments</li>
+          <li>Opened up a $500M investable universe by building the Python/SQL/BigQuery models that identified and validated new value indicators for startups</li>
+        </ul>
+      </div>
+
+      <div class="cv-role">
+        <h3>Partners in Performance, Part of Accenture</h3>
+        <p class="cv-meta">Strategy Consultant · Oct 2020 – Nov 2021 · Montreal, QC</p>
+        <ul>
+          <li>Eliminated roughly $33M in annual production loss at a $350M/year gold mine by building the Python/SQL pipeline that quantified the unmeasured operation and prioritized its loss drivers</li>
+          <li>Added $25M in annualized revenue across 10 declining sales teams by defining their north-star and KPI framework in a SQL/Tableau dashboard, then driving upsell, cross-sell, and churn plays to adoption</li>
+        </ul>
+      </div>
+
+      <div class="cv-role">
+        <h3>Education</h3>
+        <p class="cv-meta">McGill University — BA, Joint Honors Economics and Finance, Minor in Computer Science</p>
+        <p class="cv-plain">Relevant coursework: Applied Machine Learning, Econometrics &amp; Statistics, Software Systems</p>
+      </div>
+
+      <div class="cv-role">
+        <h3>Skills &amp; Interests</h3>
+        <p class="cv-plain"><strong>Stack:</strong> Python, SQL, Jupyter, Rockset, dbt, Snowflake, Airflow, Tableau, Claude Code, Codex, PySpark, scikit-learn, Sigma, Devin, ETL</p>
+        <p class="cv-plain"><strong>Interests:</strong> Music production (400k+ streams), reading, skiing, tennis, restaurants</p>
+      </div>
+    </div>
   </section>
 
   <section class="writing">
@@ -380,7 +477,9 @@ a:hover{text-decoration:underline;}
     if(isOpen) return;
     btn.setAttribute('aria-expanded','true');
     document.getElementById(btn.getAttribute('aria-controls')).hidden = false;
-    btn.closest('.tile').classList.add('open');
+    var tile = btn.closest('.tile');
+    tile.classList.add('open');
+    tile.scrollIntoView({inline:'start', block:'nearest', behavior:'smooth'});
   });
   document.addEventListener('keydown', function(e){
     if(e.key === 'Escape') closeAll();
