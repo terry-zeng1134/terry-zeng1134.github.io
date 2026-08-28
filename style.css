@@ -206,7 +206,7 @@ h1.case-title{font-size:29px; font-weight:700; letter-spacing:-.02em; margin:0 0
 .case-metric span{display:block; font-size:13.5px; color:var(--muted); margin-top:5px;}
 .casebody p{margin:0 0 15px; font-size:15.5px; line-height:1.62; color:var(--ink-2);}
 .casebody p.ctx{color:var(--muted);}
-.casefig{float:right; clear:both; width:152px; margin:4px 0 14px 24px;}
+.casefig{clear:both; width:304px; margin:24px auto 28px;}
 /* Crop to the phone: the source is a small device on a large black field, so
    the figure box is a window onto x 262-762, y 118-1024 of the 1024-square. */
 .casefig .shot{
@@ -274,4 +274,4 @@ table.params tbody tr:last-child th, table.params tbody tr:last-child td{border-
   border-radius:3px; padding:2px 8px; background:var(--surface);
 }
 .casefoot{margin-top:40px; padding-top:22px; border-top:1px solid var(--line); font-size:13.5px;}
-@media (max-width:600px){ .casefig{float:none; width:100%; max-width:300px; margin:18px 0 22px;} .casewrap{padding:30px 20px 70px;} h1.case-title{font-size:24px;} .case-metric b{font-size:33px;} }
+@media (max-width:600px){ .casefig{width:100%; max-width:304px; margin:20px auto 24px;} .casewrap{padding:30px 20px 70px;} h1.case-title{font-size:24px;} .case-metric b{font-size:33px;} }
