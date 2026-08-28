@@ -1,3 +1,4 @@
 VERIFY.md
 *.local.md
 .DS_Store
+.claude/
